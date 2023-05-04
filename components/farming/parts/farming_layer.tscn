@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://7rpw6nhau1sq"]
+
+[ext_resource type="PackedScene" uid="uid://t83c6xvbaoa2" path="res://components/farming/models/Farm_Layer.glb" id="1_85cp7"]
+[ext_resource type="Script" path="res://components/farming/scripts/FarmingLayer.cs" id="1_i83jy"]
+
+[node name="Layer" type="Node3D"]
+script = ExtResource("1_i83jy")
+
+[node name="Farm_Layer" parent="." instance=ExtResource("1_85cp7")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 0.8, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D"]
+size = Vector3(0.1, 0.1, 0.1)
