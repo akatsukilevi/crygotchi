@@ -6,6 +6,7 @@ public partial class StoragePopup : Node
 
     private ChestDecorationInstance _storage;
     private CursorState _cursorState;
+    private bool _hasSetup = false;
 
     private ItemEntry[] _items;
 
@@ -36,6 +37,8 @@ public partial class StoragePopup : Node
 
         //* Add event hooks
         this.List.ItemActivated += OnActivated;
+
+        this._hasSetup = true;
     }
 
     private void OnActivated(long index)
@@ -51,6 +54,7 @@ public partial class StoragePopup : Node
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
+        if (!this._hasSetup) return;
 
         if (Input.IsActionJustPressed("ui_cancel")) this.Close();
     }
