@@ -34,7 +34,7 @@ public partial class RoomGrid : Node
         this._roomState.OnStateChange += this.OnStateChange;
         this._cursorState.OnAction += this.OnCursorAction;
 
-        this.OnStateChange(this, null);
+        this.OnStateChange();
     }
 
     #region "General"
@@ -72,7 +72,7 @@ public partial class RoomGrid : Node
         }
     }
 
-    private void OnStateChange(object sender, EventArgs e)
+    private void OnStateChange()
     {
         switch (this._roomState.GetMode())
         {
@@ -104,10 +104,10 @@ public partial class RoomGrid : Node
 
         if (currentHovering == null || currentDecoration == null) return; //* Either no tile or no decoration
 
-        var decoration = currentDecoration.DecorationEntry ?? 
+        var decoration = currentDecoration.DecorationEntry ??
             throw new Exception($"Can't find decoration \"{currentDecoration.ID}\"!");
-        
-        if (!decoration.IsInteractable) 
+
+        if (!decoration.IsInteractable)
             return; //* Has no interaction
 
         //* Can interact here

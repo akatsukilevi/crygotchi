@@ -7,8 +7,8 @@ public partial class CursorState : Node
     private bool _isBusy = false;
 
     public event EventHandler<CursorActionEventArgs> OnAction;
-    public event EventHandler OnStateChange;
-    public event EventHandler OnItemChange;
+    public event Action OnStateChange;
+    public event Action OnItemChange;
 
     public Vector2 GetPosition()
     {
@@ -18,7 +18,7 @@ public partial class CursorState : Node
     public void SetPosition(Vector2 newPosition)
     {
         this.Position = newPosition;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public void CursorActionPressed(ActionType type)
@@ -35,7 +35,7 @@ public partial class CursorState : Node
     public void SetBusy(bool newBusy)
     {
         this._isBusy = newBusy;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public bool IsHoldingItem()
@@ -46,8 +46,8 @@ public partial class CursorState : Node
     public void HoldItem(Item heldItem)
     {
         this.HeldItem = heldItem;
-        this.OnStateChange?.Invoke(this, null);
-        this.OnItemChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
+        this.OnItemChange?.Invoke();
     }
 
     public Item TakeItem()
@@ -55,8 +55,8 @@ public partial class CursorState : Node
         var item = this.HeldItem;
         this.HeldItem = null;
 
-        this.OnStateChange?.Invoke(this, null);
-        this.OnItemChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
+        this.OnItemChange?.Invoke();
         return item;
     }
 

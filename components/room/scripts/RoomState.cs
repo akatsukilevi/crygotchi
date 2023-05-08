@@ -13,7 +13,7 @@ public partial class RoomState : Node
     private RoomTileDecoration _selectedDecorating = null;
     private int _selectedDecoratingIndex = 0;
 
-    public event EventHandler OnStateChange;
+    public event Action OnStateChange;
     private TilesDatabase _tilesDatabase;
 
     public override void _Ready()
@@ -35,14 +35,14 @@ public partial class RoomState : Node
     public void SetMode(RoomMode newMode)
     {
         this._mode = newMode;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public RoomTileInstance GetTileAt(Vector2 position) =>
-        !this._tiles.ContainsKey($"{position.X},{position.Y}") ? 
+        !this._tiles.ContainsKey($"{position.X},{position.Y}") ?
             null : this._tiles[$"{position.X},{position.Y}"];
 
-    public void NotifyUpdate() => this.OnStateChange?.Invoke(this, null);
+    public void NotifyUpdate() => this.OnStateChange?.Invoke();
     #endregion
 
     #region "Building Mode"
@@ -55,7 +55,7 @@ public partial class RoomState : Node
     public void SetSelectedBuilding(RoomTile newSelected)
     {
         this._selectedBuilding = newSelected;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public RoomTileInstance PutTileAtPosition(Vector2 position)
@@ -71,7 +71,7 @@ public partial class RoomState : Node
         };
 
         this._tiles[$"{position.X},{position.Y}"] = tile;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
         return tile;
     }
 
@@ -83,7 +83,7 @@ public partial class RoomState : Node
         this._tiles.Remove($"{position.X},{position.Y}");
         toRemove.Dispose();
 
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public void NextSelectedBuilding()
@@ -91,7 +91,7 @@ public partial class RoomState : Node
         this._selectedBuildingIndex = this._tilesDatabase.ClampTileIndex(this._selectedBuildingIndex + 1);
         this._selectedBuilding = this._tilesDatabase.GetTileByIndex(this._selectedBuildingIndex);
 
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public void PreviousSelectedBuilding()
@@ -99,7 +99,7 @@ public partial class RoomState : Node
         this._selectedBuildingIndex = this._tilesDatabase.ClampTileIndex(this._selectedBuildingIndex - 1);
         this._selectedBuilding = this._tilesDatabase.GetTileByIndex(this._selectedBuildingIndex);
 
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
     #endregion
 
@@ -112,7 +112,7 @@ public partial class RoomState : Node
     public void SetSelectedDecorating(RoomTileDecoration newSelected)
     {
         this._selectedDecorating = newSelected;
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public void NextSelectedDecorating()
@@ -120,7 +120,7 @@ public partial class RoomState : Node
         this._selectedDecoratingIndex = this._tilesDatabase.ClampDecorationIndex(this._selectedDecoratingIndex + 1);
         this._selectedDecorating = this._tilesDatabase.GetDecorationByIndex(this._selectedDecoratingIndex);
 
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
 
     public void PreviousSelectedDecorating()
@@ -128,7 +128,7 @@ public partial class RoomState : Node
         this._selectedDecoratingIndex = this._tilesDatabase.ClampDecorationIndex(this._selectedDecoratingIndex - 1);
         this._selectedDecorating = this._tilesDatabase.GetDecorationByIndex(this._selectedDecoratingIndex);
 
-        this.OnStateChange?.Invoke(this, null);
+        this.OnStateChange?.Invoke();
     }
     #endregion
 }
