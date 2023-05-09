@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwdljb4i58h8"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://components/farming/scripts/FarmingGUI.cs" id="1_4xh8k"]
+[ext_resource type="Script" path="res://components/farming/scripts/GUI/FarmingGUI.cs" id="1_4xh8k"]
 
 [node name="FarmingGUI" type="Panel" node_paths=PackedStringArray("Viewer")]
 anchors_preset = 8
