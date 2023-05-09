@@ -8,26 +8,22 @@ public partial class FarmingDecoration : RoomTileDecoration
 
     public override RoomTileDecorationInstance CreateInstance()
     {
-        return new FarmingInstance()
+        var instance = new FarmingInstance()
         {
             DecorationEntry = this,
             ID = this._id,
         };
+
+        return instance;
     }
 
     public override void Interact(RoomTileDecorationInstance instance, Node source)
     {
         var farm = (FarmingInstance)instance;
+        var root = source.GetTree().Root;
+        var tower = farm.GetTower();
 
-        //* Get the cursor state if it is missing
-        this._cursorState ??= source.GetNode<CursorState>("/root/CursorState");
-
-        if (this._cursorState.IsHoldingItem())
-        {
-            farm.CreateLayer();
-            return;
-        }
-
-        farm.RemoveLayer(0);
+        //* Should open the popup here
+        tower.OpenInteraction(root);
     }
 }

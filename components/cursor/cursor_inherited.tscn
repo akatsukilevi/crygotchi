@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://crwfk1dfugu1k"]
+
+[ext_resource type="PackedScene" uid="uid://ceb33qcxcbqp2" path="res://components/cursor/models/Cursor.gltf" id="1_7qt7i"]
+
+[node name="Cursor" instance=ExtResource("1_7qt7i")]
+
+[node name="Cursor Walls" parent="." index="0"]
+layers = 512
+
+[node name="Cursor Indicator" parent="." index="1"]
+layers = 512
