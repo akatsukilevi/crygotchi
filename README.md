@@ -26,17 +26,18 @@
 	</a>
 </p>
 
-A casual room building, decoration and virtual pet game made in Rust. Only the code is available here; the game data (such as art assets and levels) can only be legally obtained upon purchase of the full game.
+A casual room building, decoration and virtual pet game made in Godot.
+This is the FOSS version: all assets, maps, code and included files are released upon GPLv3 license
 
 This repository lets you‥
 
-- Run the open source code with the commercial data to perform experiments for educational purposes.
+- Run the open source code to have a fully self-compiled FOSS version of the game
 - Propose changes to be merged back into the game.
 - Create modifications for Crygotchi that would otherwise be impossible.
 - Use helpful code snippets in your projects.
 - Create your own "total conversions" that use an entirely new set of assets.
 
-If you would like to distribute any of the original Crygotchi assets, you must obtain explicit written permission from CovenFox Studios.
+Also, If you would like to distribute any of the original Crygotchi assets for non-Crygotchi assets, you must obtain explicit written permission from CovenFox Studios(Do feel free to @ us on Discord!).
 
 <hr/>
 
