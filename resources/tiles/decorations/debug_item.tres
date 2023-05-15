@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://c7nx8etl5b2a4" path="res://icon.svg" id="1_eah7u"]
 [ext_resource type="Script" path="res://components/room/scripts/Decorations/DebugItemDecoration.cs" id="1_p2a1m"]
 [ext_resource type="PackedScene" uid="uid://behbflnd1t6m" path="res://assets/decorations/DebugMesh.tscn" id="2_3brks"]
-[ext_resource type="Resource" uid="uid://bccs3fhsh1hcm" path="res://resources/items/berry.tres" id="2_7dg1m"]
+[ext_resource type="Resource" uid="uid://jjfhdt4gbmlg" path="res://resources/items/berry_seed.tres" id="2_sgpkg"]
 
 [resource]
 script = ExtResource("1_p2a1m")
-ItemToGive = ExtResource("2_7dg1m")
+ItemToGive = ExtResource("2_sgpkg")
 Name = "Debug"
 Description = "Debug"
 Icon = ExtResource("1_eah7u")

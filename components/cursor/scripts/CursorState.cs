@@ -43,6 +43,11 @@ public partial class CursorState : Node
         return this.HeldItem != null;
     }
 
+    public bool ItemTypeCheck<T>()
+    {
+        return this.HeldItem is T;
+    }
+
     public void HoldItem(Item heldItem)
     {
         this.HeldItem = heldItem;

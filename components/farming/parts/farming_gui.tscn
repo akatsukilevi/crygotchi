@@ -1,21 +1,28 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://epmlmw8nyi3b"]
 
 [ext_resource type="Script" path="res://components/farming/scripts/GUI/FarmingGUI.cs" id="1_4xh8k"]
 
-[node name="FarmingGUI" type="Panel" node_paths=PackedStringArray("Viewer")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jiddp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hwqnb"]
+
+[node name="FarmingGUI" type="Panel" node_paths=PackedStringArray("Viewer", "ToolLabel", "List", "Details")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
+offset_left = -550.0
 offset_top = -300.0
-offset_right = 400.0
+offset_right = 550.0
 offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4xh8k")
-Viewer = NodePath("Content/TextureRect")
+Viewer = NodePath("Content/Camera/TextureRect")
+ToolLabel = NodePath("Content/Camera/Label")
+List = NodePath("Content/Inventory/ItemList")
+Details = NodePath("Content/Inventory/Details")
 
 [node name="Title" type="Panel" parent="."]
 layout_mode = 1
@@ -35,7 +42,7 @@ text = "Farming"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Content" type="Panel" parent="."]
+[node name="Content" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +54,16 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Content"]
+[node name="Camera" type="Panel" parent="Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -305.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/Camera"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,3 +71,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="Label" type="Label" parent="Content/Camera"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -31.0
+offset_right = 427.0
+offset_bottom = -5.0
+grow_vertical = 0
+text = "If you can read this, I fucked up something really badly"
+
+[node name="Inventory" type="Panel" parent="Content"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="Content/Inventory"]
+custom_minimum_size = Vector2(290, 475)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jiddp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hwqnb")
+auto_height = true
+same_column_width = true
+fixed_column_width = 200
+fixed_icon_size = Vector2i(32, 32)
+
+[node name="Details" type="Tree" parent="Content/Inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+hide_folding = true
+enable_recursive_folding = false
+hide_root = true
+scroll_horizontal_enabled = false

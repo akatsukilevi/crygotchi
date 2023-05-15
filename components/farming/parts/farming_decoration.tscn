@@ -6,9 +6,12 @@
 [ext_resource type="PackedScene" path="res://components/farming/parts/farming_gui.tscn" id="3_1yqmy"]
 [ext_resource type="Script" path="res://components/farming/scripts/Interaction/FarmingCamera.cs" id="5_q0evk"]
 
-[node name="Farm" type="Node3D"]
+[node name="Farm" type="Node3D" node_paths=PackedStringArray("LayersParent", "InteractionViewport", "InteractionCamera")]
 script = ExtResource("1_t3eu6")
+LayersParent = NodePath("Layers")
 LayerPrefab = ExtResource("2_ceqoc")
+InteractionViewport = NodePath("CameraViewport")
+InteractionCamera = NodePath("CameraViewport/InteractionCamera")
 GUIPrefab = ExtResource("3_1yqmy")
 
 [node name="Farm_Base" parent="." instance=ExtResource("1_odaq6")]
@@ -19,6 +22,7 @@ use_occlusion_culling = true
 size = Vector2i(800, 600)
 
 [node name="InteractionCamera" type="Camera3D" parent="CameraViewport"]
+visible = false
 cull_mask = 1048063
 script = ExtResource("5_q0evk")
 Speed = 10.0

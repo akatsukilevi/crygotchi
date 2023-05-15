@@ -28,12 +28,22 @@ public partial class FarmingTower : Node3D
         this.OnLayersChange();
     }
 
+    public FarmingInstance GetInstance()
+    {
+        return this._instance;
+    }
+
     public void OpenInteraction(Node parent)
     {
         var popup = this.GUIPrefab.Instantiate<FarmingGUI>();
         popup.Ready += () => popup.Setup(this, this.InteractionViewport);
 
         parent.AddChild(popup);
+    }
+
+    public void UIClose()
+    {
+        this.InteractionCamera.SetTarget(this);
     }
 
     public Vector2 ClampInput(Vector2 target)
@@ -45,6 +55,12 @@ public partial class FarmingTower : Node3D
         if (target.Y >= this._layerObjects.Count) target.Y = 0;
 
         return target;
+    }
+
+    public FarmingSlot GetSlot(Vector2 target)
+    {
+        var layer = this._layerObjects[(int)target.Y];
+        return layer.GetSlot((int)target.X);
     }
 
     public void SetCameraTarget(Node3D target, bool skipLerp = false)
@@ -60,10 +76,17 @@ public partial class FarmingTower : Node3D
 
     public Node3D GetPosition(Vector2 position)
     {
-        if (this._layerObjects.Count == 0) return this;
+        if (this._layerObjects.Count == 0)
+        {
+            GD.PushWarning("Layer Object list is empty! Returning tower");
+            return this;
+        }
 
         var layer = this._layerObjects.ElementAt((int)position.Y);
-        return layer.GetPotPosition((int)position.X);
+        var target = layer.GetPotPosition((int)position.X);
+        if (target == null) throw new System.Exception("GetPosition target is null!");
+
+        return target;
     }
 
     private void OnLayersChange()
