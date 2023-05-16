@@ -56,10 +56,10 @@ public partial class CursorManager : Node
         this._cursorState.OnItemChange += OnItemUpdate;
         this._roomState.OnStateChange += OnStateUpdate;
 
-        this.OnStateUpdate(this, null);
+        this.OnStateUpdate();
     }
 
-    private void OnStateUpdate(object sender, EventArgs e)
+    private void OnStateUpdate()
     {
         //* Should check what Icon will be showing
         var mode = this._roomState.GetMode();
@@ -78,7 +78,7 @@ public partial class CursorManager : Node
         }
     }
 
-    private void OnItemUpdate(object sender, EventArgs e)
+    private void OnItemUpdate()
     {
         //* Ensure to clean the current item icon
         if (this._holdingIcon != null)

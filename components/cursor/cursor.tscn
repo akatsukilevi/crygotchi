@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://jevpdgxbemyj"]
 
-[ext_resource type="PackedScene" uid="uid://ceb33qcxcbqp2" path="res://components/cursor/models/Cursor.gltf" id="1_mod8t"]
 [ext_resource type="Script" path="res://components/cursor/scripts/CursorManager.cs" id="1_q0eie"]
 [ext_resource type="Script" path="res://components/cursor/scripts/CursorInput.cs" id="3_jlrq8"]
+[ext_resource type="PackedScene" uid="uid://crwfk1dfugu1k" path="res://components/cursor/cursor_inherited.tscn" id="3_onvfj"]
 [ext_resource type="PackedScene" uid="uid://cnyv4f1mde1iy" path="res://components/room/room_tile.tscn" id="5_c64e5"]
 [ext_resource type="PackedScene" uid="uid://driwyv83grbeg" path="res://components/cursor/models/Icon_Remove.glb" id="5_roosv"]
 
@@ -23,7 +23,7 @@ NegativeColor = Color(1, 0.52549, 0.588235, 1)
 [node name="Input" type="Node" parent="."]
 script = ExtResource("3_jlrq8")
 
-[node name="Mesh" parent="." instance=ExtResource("1_mod8t")]
+[node name="Mesh" parent="." instance=ExtResource("3_onvfj")]
 
 [node name="Icons" type="Node3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)

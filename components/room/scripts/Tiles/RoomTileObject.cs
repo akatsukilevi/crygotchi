@@ -35,4 +35,14 @@ public partial class RoomTileObject : Node3D
         var decoInstance = deco.Mesh.Instantiate();
         this.DecorationParent.AddChild(decoInstance);
     }
+
+    public RoomTileInstance GetInstance()
+    {
+        return TileInstance;
+    }
+
+    public RoomTileDecorationInstance GetDecorationInstance()
+    {
+        return this.TileInstance.Decoration;
+    }
 }

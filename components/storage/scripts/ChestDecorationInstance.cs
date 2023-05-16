@@ -6,6 +6,11 @@ public partial class ChestDecorationInstance : RoomTileDecorationInstance
 {
     private readonly List<ItemEntry> _items = new();
 
+    public ItemEntry[] GetItems()
+    {
+        return this._items.ToArray();
+    }
+
     public void AddItem(Item item)
     {
         int existingIndex = this._items.FindIndex(x => x.Id == item.GetId());
@@ -25,11 +30,6 @@ public partial class ChestDecorationInstance : RoomTileDecorationInstance
             Item = item,
             Amount = 1
         });
-    }
-
-    public ItemEntry[] GetItems()
-    {
-        return this._items.ToArray();
     }
 
     public Item TakeItem(string id)

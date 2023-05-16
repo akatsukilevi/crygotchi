@@ -1,5 +1,7 @@
-[gd_scene format=3 uid="uid://behbflnd1t6m"]
+[gd_scene load_steps=2 format=3 uid="uid://behbflnd1t6m"]
 
-[node name="DebugMesh" type="CSGSphere3D"]
-radial_segments = 16
-rings = 8
+[ext_resource type="PackedScene" uid="uid://bt5ecmyjnnko2" path="res://assets/decorations/Debug.glb" id="1_6tj52"]
+
+[node name="DebugMesh" type="Node3D"]
+
+[node name="Debug" parent="." instance=ExtResource("1_6tj52")]

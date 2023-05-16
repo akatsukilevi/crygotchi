@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8q2oley7suje"]
+
+[ext_resource type="PackedScene" uid="uid://t83c6xvbaoa2" path="res://components/farming/models/Farm_Layer.glb" id="1_85cp7"]
+[ext_resource type="Script" path="res://components/farming/scripts/Interaction/FarmingLayer.cs" id="1_mrom1"]
+[ext_resource type="PackedScene" uid="uid://byxuc0cx1hyqu" path="res://components/farming/models/Farm_Plant.glb" id="2_4w1jq"]
+
+[node name="Layer" type="Node3D" node_paths=PackedStringArray("LayerMesh")]
+script = ExtResource("1_mrom1")
+LayerMesh = NodePath("Farm_Layer")
+PlantPrefab = ExtResource("2_4w1jq")
+
+[node name="Farm_Layer" parent="." instance=ExtResource("1_85cp7")]
+
+[node name="PotA_CamTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0.6)
+
+[node name="PotB_CamTarget" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0.85, 0)
+
+[node name="PotC_CamTarget" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.85, -0.6)
+
+[node name="PotD_CamTarget" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.6, 0.85, 0)
