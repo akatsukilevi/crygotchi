@@ -1,0 +1,308 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://day6q71y202t"
+path="res://.godot/imported/Hub.glb-2970a247a599ea529d3cb97fa6ac98cc.scn"
+
+[deps]
+
+source_file="res://components/hub/mesh/Hub.glb"
+dest_files=["res://.godot/imported/Hub.glb-2970a247a599ea529d3cb97fa6ac98cc.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=false
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Fountain": {
+"generate/physics": true
+},
+"PATH:Monorail Ceiling": {
+"generate/physics": true
+},
+"PATH:Monorail Plant Pots": {
+"generate/physics": true
+},
+"PATH:Monorail Rail": {
+"generate/physics": true
+},
+"PATH:Monorail Stairs Left": {
+"generate/physics": true
+},
+"PATH:Monorail Stairs Right": {
+"generate/physics": true
+},
+"PATH:Monorail Stairs Right Border": {
+"generate/physics": true
+},
+"PATH:Monorail Stairs Right Border001": {
+"generate/physics": true
+},
+"PATH:Monorail Station": {
+"generate/physics": true
+},
+"PATH:Road Base": {
+"generate/physics": true
+},
+"PATH:Tree": {
+"generate/physics": true
+},
+"PATH:bakery": {
+"generate/physics": true
+},
+"PATH:bench": {
+"generate/physics": true
+},
+"PATH:bench001": {
+"generate/physics": true
+},
+"PATH:blue_car": {
+"generate/physics": true
+},
+"PATH:blue_house": {
+"generate/physics": true
+},
+"PATH:car_light_green": {
+"generate/physics": true
+},
+"PATH:car_light_green001": {
+"generate/physics": true
+},
+"PATH:car_light_red": {
+"generate/physics": true
+},
+"PATH:car_light_red001": {
+"generate/physics": true
+},
+"PATH:cinema": {
+"generate/physics": true
+},
+"PATH:coffe_shop": {
+"generate/physics": true
+},
+"PATH:double_bin": {
+"generate/physics": true
+},
+"PATH:fire_station": {
+"generate/physics": true
+},
+"PATH:gas_sign": {
+"generate/physics": true
+},
+"PATH:gas_station": {
+"generate/physics": true
+},
+"PATH:gas_station_shop": {
+"generate/physics": true
+},
+"PATH:green_house": {
+"generate/physics": true
+},
+"PATH:hospital": {
+"generate/physics": true
+},
+"PATH:hotel": {
+"generate/physics": true
+},
+"PATH:lantern": {
+"generate/physics": true
+},
+"PATH:lantern001": {
+"generate/physics": true
+},
+"PATH:lantern002": {
+"generate/physics": true
+},
+"PATH:lantern003": {
+"generate/physics": true
+},
+"PATH:lantern004": {
+"generate/physics": true
+},
+"PATH:lantern005": {
+"generate/physics": true
+},
+"PATH:lantern006": {
+"generate/physics": true
+},
+"PATH:lantern007": {
+"generate/physics": true
+},
+"PATH:lantern008": {
+"generate/physics": true
+},
+"PATH:lantern009": {
+"generate/physics": true
+},
+"PATH:lantern010": {
+"generate/physics": true
+},
+"PATH:lantern011": {
+"generate/physics": true
+},
+"PATH:lantern012": {
+"generate/physics": true
+},
+"PATH:lantern013": {
+"generate/physics": true
+},
+"PATH:lantern014": {
+"generate/physics": true
+},
+"PATH:lantern015": {
+"generate/physics": true
+},
+"PATH:lantern016": {
+"generate/physics": true
+},
+"PATH:lantern017": {
+"generate/physics": true
+},
+"PATH:lantern018": {
+"generate/physics": true
+},
+"PATH:lantern019": {
+"generate/physics": true
+},
+"PATH:lantern020": {
+"generate/physics": true
+},
+"PATH:lantern021": {
+"generate/physics": true
+},
+"PATH:lantern022": {
+"generate/physics": true
+},
+"PATH:lantern023": {
+"generate/physics": true
+},
+"PATH:lantern024": {
+"generate/physics": true
+},
+"PATH:lantern025": {
+"generate/physics": true
+},
+"PATH:lantern026": {
+"generate/physics": true
+},
+"PATH:lantern027": {
+"generate/physics": true
+},
+"PATH:lantern028": {
+"generate/physics": true
+},
+"PATH:lantern029": {
+"generate/physics": true
+},
+"PATH:lantern030": {
+"generate/physics": true
+},
+"PATH:lantern031": {
+"generate/physics": true
+},
+"PATH:light_green": {
+"generate/physics": true
+},
+"PATH:light_green001": {
+"generate/physics": true
+},
+"PATH:light_red": {
+"generate/physics": true
+},
+"PATH:light_red001": {
+"generate/physics": true
+},
+"PATH:market": {
+"generate/physics": true
+},
+"PATH:pizzeria": {
+"generate/physics": true
+},
+"PATH:police_station": {
+"generate/physics": true
+},
+"PATH:small_bus": {
+"generate/physics": true
+},
+"PATH:soda": {
+"generate/physics": true
+},
+"PATH:soda001": {
+"generate/physics": true
+},
+"PATH:taxi": {
+"generate/physics": true
+},
+"PATH:tree_1": {
+"generate/physics": true
+},
+"PATH:tree_1001": {
+"generate/physics": true
+},
+"PATH:tree_1002": {
+"generate/physics": true
+},
+"PATH:tree_1003": {
+"generate/physics": true
+},
+"PATH:tree_1004": {
+"generate/physics": true
+},
+"PATH:tree_2": {
+"generate/physics": true
+},
+"PATH:tree_2001": {
+"generate/physics": true
+},
+"PATH:tree_2002": {
+"generate/physics": true
+},
+"PATH:tree_2003": {
+"generate/physics": true
+},
+"PATH:tree_2004": {
+"generate/physics": true
+},
+"PATH:tree_3": {
+"generate/physics": true
+},
+"PATH:tree_3001": {
+"generate/physics": true
+},
+"PATH:tree_3002": {
+"generate/physics": true
+},
+"PATH:tree_3003": {
+"generate/physics": true
+},
+"PATH:tree_3004": {
+"generate/physics": true
+},
+"PATH:tree_3005": {
+"generate/physics": true
+},
+"PATH:tree_3006": {
+"generate/physics": true
+},
+"PATH:yellow_house": {
+"generate/physics": true
+}
+}
+}
+gltf/embedded_image_handling=1
