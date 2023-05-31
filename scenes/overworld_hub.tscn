@@ -51,5 +51,3 @@ Offset = Vector3(90, 75, 90)
 transform = Transform3D(-0.744312, 0, -0.667832, 0, 1, 0, 0.667832, 0, -0.744312, 0, 1.75, -23)
 script = ExtResource("4_qe0tp")
 Camera = NodePath("../Camera3D")
-MoveSpeed = 200.0
-MaxSpeed = 150.0
