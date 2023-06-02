@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dj0n1wfnntcgq"]
+[gd_scene load_steps=9 format=3 uid="uid://dj0n1wfnntcgq"]
 
 [ext_resource type="PackedScene" uid="uid://bpfxnttam50q1" path="res://components/hub/mesh/HubMesh.tscn" id="1_cjump"]
 [ext_resource type="Script" path="res://components/hub/scripts/CryCamera.cs" id="2_saq06"]
@@ -25,6 +25,9 @@ fog_height_density = 7.4105
 volumetric_fog_density = 0.0326
 volumetric_fog_albedo = Color(0.815686, 0.796078, 0.960784, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_cbtvu"]
+size = Vector3(1, 1, 160)
+
 [node name="Hub" type="Node3D"]
 
 [node name="World" type="WorldEnvironment" parent="."]
@@ -37,17 +40,28 @@ directional_shadow_mode = 0
 
 [node name="Hub Mesh" parent="." instance=ExtResource("1_cjump")]
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("Target")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("CullingArea", "Target")]
 transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 118.226, 98.874, 95.745)
 projection = 1
 current = true
 size = 20.0
 near = 0.01
 script = ExtResource("2_saq06")
+CullingArea = NodePath("Area3D")
 Target = NodePath("../Cry")
 Offset = Vector3(90, 75, 90)
+CullingWhitelist = PackedStringArray("Road Base", "Cry", "Lantern", "bakery", "market", "pizzeria", "shop", "house", "light", "double_bin", "soda", "bench", "Monorail", "fountain", "gas")
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -5.96046e-08, 1, 0, 0, -100)
+input_ray_pickable = false
+priority = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+shape = SubResource("BoxShape3D_cbtvu")
 
 [node name="Cry" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("3_5u1if")]
 transform = Transform3D(-0.744312, 0, -0.667832, 0, 1, 0, 0.667832, 0, -0.744312, 0, 1.75, -23)
+collision_layer = 2
 script = ExtResource("4_qe0tp")
 Camera = NodePath("../Camera3D")

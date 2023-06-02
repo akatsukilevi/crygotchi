@@ -1,12 +1,50 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpfxnttam50q1"]
+[gd_scene load_steps=4 format=3 uid="uid://bpfxnttam50q1"]
 
 [ext_resource type="PackedScene" uid="uid://day6q71y202t" path="res://components/hub/mesh/Hub.glb" id="1_othah"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lft5e"]
 size = Vector3(15.6103, 0.03, 3.36479)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfrqs"]
+size = Vector3(2.734, 25, 25)
+
 [node name="Hub" instance=ExtResource("1_othah")]
 
 [node name="CollisionShape3D" parent="Road Base/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011, 0.01, -0.012)
 shape = SubResource("BoxShape3D_lft5e")
+
+[node name="OOB" type="StaticBody3D" parent="." index="91"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="OOB_Wall1" type="CollisionShape3D" parent="OOB" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall2" type="CollisionShape3D" parent="OOB" index="1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 23)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall3" type="CollisionShape3D" parent="OOB" index="2"]
+transform = Transform3D(-0.636805, 0, -0.771025, 0, 1, 0, 0.771025, 0, -0.636805, -18.5196, 0, 17)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall4" type="CollisionShape3D" parent="OOB" index="3"]
+transform = Transform3D(0.651688, 0, -0.758487, 0, 1, 0, 0.758487, 0, 0.651688, 19.4825, 0, 17.6575)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall5" type="CollisionShape3D" parent="OOB" index="4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -26)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall6" type="CollisionShape3D" parent="OOB" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall7" type="CollisionShape3D" parent="OOB" index="6"]
+transform = Transform3D(0.555193, 0, -0.831722, 0, 1, 0, 0.831722, 0, 0.555193, -17.1647, 0, -18.7796)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall8" type="CollisionShape3D" parent="OOB" index="7"]
+transform = Transform3D(-0.659687, 0, -0.751541, 0, 1, 0, 0.751541, 0, -0.659687, 16.8353, 0, -20.5409)
+shape = SubResource("BoxShape3D_rfrqs")

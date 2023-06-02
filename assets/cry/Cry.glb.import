@@ -5427,6 +5427,84 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": null
 }
+},
+"materials": {
+"Baret Flag": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Baret Flag.tres"
+},
+"Body": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Body.tres"
+},
+"Coat Necklace": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Coat Necklace.tres"
+},
+"Coat Necklace Ribbon": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Coat Necklace Ribbon.tres"
+},
+"Eye Highlight": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Eye Highlight.tres"
+},
+"Eye Sclera": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Eye Sclera.tres"
+},
+"Eyebrow": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Eyebrow.tres"
+},
+"Eyeline": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Eyeline.tres"
+},
+"Hair": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Hair.tres"
+},
+"Horns": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Horns.tres"
+},
+"Inner Shirt": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Inner Shirt.tres"
+},
+"Iris": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Iris.tres"
+},
+"Mouth": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Mouth.tres"
+},
+"Shirt": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Shirt.tres"
+},
+"Shoes": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Shoes.tres"
+},
+"Shorts": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Shorts.tres"
+},
+"Skin Face": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Skin Face.tres"
+},
+"Skirt Lower": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Skirt Lower.tres"
+},
+"Skirt Outer": {
+"use_external/enabled": true,
+"use_external/path": "res://assets/cry/materials/Skirt Outer.tres"
+}
 }
 }
 gltf/embedded_image_handling=1
