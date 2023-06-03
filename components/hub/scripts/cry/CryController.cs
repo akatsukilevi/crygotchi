@@ -12,18 +12,24 @@ public partial class CryController : CharacterBody3D
     [Export] public float Gravity = -80.0f;
 
     private AnimationPlayer _animator;
+    private CryState _state;
+
+    private Vector3 _inputDirection = Vector3.Zero;
+    private Vector3 _moveDirection = Vector3.Zero;
     private bool _isRunning = false;
-    private Vector3 _moveDirection;
-    private Vector3 _inputDirection;
 
     public override void _Ready()
     {
         this._animator = this.GetNode<AnimationPlayer>("./AnimationPlayer");
+        this._state = this.GetNode<CryState>("/root/CryState");
+
         this._animator.Play("Idle");
     }
 
     public override void _Process(double delta)
     {
+        if (this._state.IsBusy()) return;
+
         this._inputDirection = GetInputDirection();
         this._isRunning = Input.IsActionPressed("cry_sprint");
     }

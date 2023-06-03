@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dj0n1wfnntcgq"]
+[gd_scene load_steps=10 format=3 uid="uid://dj0n1wfnntcgq"]
 
 [ext_resource type="PackedScene" uid="uid://bpfxnttam50q1" path="res://components/hub/mesh/HubMesh.tscn" id="1_cjump"]
-[ext_resource type="Script" path="res://components/hub/scripts/CryCamera.cs" id="2_saq06"]
+[ext_resource type="Script" path="res://components/hub/scripts/cry/CryCamera.cs" id="2_nc5h4"]
 [ext_resource type="PackedScene" uid="uid://cku3kwh7mgtay" path="res://assets/cry/CryCharacter.tscn" id="3_5u1if"]
-[ext_resource type="Script" path="res://components/hub/scripts/CryController.cs" id="4_qe0tp"]
+[ext_resource type="Script" path="res://components/hub/scripts/cry/CryController.cs" id="4_esp3h"]
+[ext_resource type="PackedScene" uid="uid://fixmahy767ad" path="res://components/hub/npcs/test_npc.tscn" id="5_q6qio"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a3lci"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,35 +34,42 @@ size = Vector3(1, 1, 160)
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5lval")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
 light_color = Color(0.815686, 0.768627, 0.921569, 1)
 directional_shadow_mode = 0
 
-[node name="Hub Mesh" parent="." instance=ExtResource("1_cjump")]
+[node name="Hub Mesh" parent="World" instance=ExtResource("1_cjump")]
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("CullingArea", "Target")]
+[node name="Character" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Character" node_paths=PackedStringArray("CullingArea", "Target") groups=["Hub_Player"]]
 transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 118.226, 98.874, 95.745)
 projection = 1
 current = true
 size = 20.0
 near = 0.01
-script = ExtResource("2_saq06")
+script = ExtResource("2_nc5h4")
 CullingArea = NodePath("Area3D")
 Target = NodePath("../Cry")
 Offset = Vector3(90, 75, 90)
 CullIgnoreGroups = PackedStringArray("Hub_Player", "Hub_NoCulling", "Hub_NPC")
 
-[node name="Area3D" type="Area3D" parent="Camera3D"]
+[node name="Area3D" type="Area3D" parent="Character/Camera3D" groups=["Hub_Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -5.96046e-08, 1, 0, 0, -100)
 input_ray_pickable = false
 priority = 1.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/Camera3D/Area3D" groups=["Hub_Player"]]
 shape = SubResource("BoxShape3D_cbtvu")
 
-[node name="Cry" parent="." node_paths=PackedStringArray("Camera") groups=["Hub_Player"] instance=ExtResource("3_5u1if")]
+[node name="Cry" parent="Character" node_paths=PackedStringArray("Camera") instance=ExtResource("3_5u1if")]
 transform = Transform3D(-0.744312, 0, -0.667832, 0, 1, 0, 0.667832, 0, -0.744312, 0, 1.75, -23)
 collision_layer = 2
-script = ExtResource("4_qe0tp")
+script = ExtResource("4_esp3h")
 Camera = NodePath("../Camera3D")
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="john_doe" parent="NPCs" instance=ExtResource("5_q6qio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -19)
