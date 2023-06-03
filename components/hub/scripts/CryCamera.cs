@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Crygotchi;
 
 public partial class CryCamera : Camera3D
@@ -12,7 +9,7 @@ public partial class CryCamera : Camera3D
     [ExportGroup("Settings")]
     [Export] public Vector3 Offset;
     [Export] public float Speed = 5.0f;
-    [Export] public string[] CullingWhitelist = new string[] { };
+    [Export] public string[] CullIgnoreGroups = new string[] { };
 
     public override void _Ready()
     {
@@ -32,8 +29,6 @@ public partial class CryCamera : Camera3D
 
     private void OnAreaCullEntered(Node3D collider)
     {
-        if (collider.Name.ToString().Contains("OOB")) return; //* Don't touch the OOB invisible walls
-
         var target = collider.GetParentNode3D();
         if (target == null)
         {
@@ -42,34 +37,25 @@ public partial class CryCamera : Camera3D
         }
 
         // TODO: Dithering effect instead of just hiding stuff would be nicer
-        if (this.IsObjectCullable(target.Name)) target.Hide();
+        if (this.CanCull(collider, target)) target.Hide();
     }
 
     private void OnAreaCullExited(Node3D collider)
     {
-        if (collider.Name.ToString().Contains("OOB")) return; //* Don't touch the OOB invisible walls
-
         var target = collider.GetParentNode3D();
         if (target == null) GD.PushWarning($"Could not find parent for {collider.Name}({collider})");
 
-        if (this.IsObjectCullable(target.Name)) target.Show();
+        if (this.CanCull(collider, target)) target.Show();
     }
 
-
-    //! There should be a better way to do this
-    //! But Godot doesn't like when I export a List<T>
-    //! And keep calling `ToList` every time something needs to be culled is Not Good(tm)
-    //! Also need to match partial names, soooooo
-    //! Until me and my last two braincells can think on a better solution
-    //! That's what I'll be doing
-    private bool IsObjectCullable(string targetName)
+    private bool CanCull(Node3D collider, Node3D target)
     {
-        foreach (string name in this.CullingWhitelist)
+        foreach (var group in this.CullIgnoreGroups)
         {
-            if (targetName.ToLower() == name.ToLower()) return false; //* If the name is the same
-            if (targetName.ToLower().Contains(name.ToLower())) return false; //* If the name includes it
+            if (collider.IsInGroup(group)) return false; //* Fail if the collider is on the group
+            if (target.IsInGroup(group)) return false; //* Fail if the target is on the group
         }
 
-        return true;
+        return true; //* Neither are, can continue
     }
 }

@@ -50,7 +50,7 @@ script = ExtResource("2_saq06")
 CullingArea = NodePath("Area3D")
 Target = NodePath("../Cry")
 Offset = Vector3(90, 75, 90)
-CullingWhitelist = PackedStringArray("Road Base", "Cry", "Lantern", "bakery", "market", "pizzeria", "shop", "house", "light", "double_bin", "soda", "bench", "Monorail", "fountain", "gas")
+CullIgnoreGroups = PackedStringArray("Hub_Player", "Hub_NoCulling", "Hub_NPC")
 
 [node name="Area3D" type="Area3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -5.96046e-08, 1, 0, 0, -100)
@@ -60,7 +60,7 @@ priority = 1.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D"]
 shape = SubResource("BoxShape3D_cbtvu")
 
-[node name="Cry" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("3_5u1if")]
+[node name="Cry" parent="." node_paths=PackedStringArray("Camera") groups=["Hub_Player"] instance=ExtResource("3_5u1if")]
 transform = Transform3D(-0.744312, 0, -0.667832, 0, 1, 0, 0.667832, 0, -0.744312, 0, 1.75, -23)
 collision_layer = 2
 script = ExtResource("4_qe0tp")
