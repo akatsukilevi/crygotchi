@@ -1,21 +1,25 @@
-using System.Threading.Tasks;
-
 namespace Crygotchi;
 
 public partial class JohnDoe : NPC
 {
-    protected override async Task StartInteraction()
+    private DialogueService _dialogue;
+
+    public override void _Ready()
     {
-        GD.Print("[ JD ] Interaction has started! Will wait 5 seconds then return");
-
-        await Task.Delay(5000);
-
-        GD.Print("[ JD ] Finishing interaction!");
-        await this.FinishInteraction();
+        base._Ready();
+        this._dialogue = this.GetNode<DialogueService>("/root/DialogueService");
     }
 
-    protected override async Task FinishInteraction()
+    protected override void StartInteraction()
     {
-        await base.FinishInteraction();
+        var dialog = new Dialogue()
+            .AddText("John Doe", "Hello! My name is John Doe!")
+            .AddText("John Doe", "Theses texts will show only one by one")
+            .AddCallback(() => GD.Print("Hello from callback!"))
+            .AddText("John Doe", "The previous one triggered a callback! And next one will finish it")
+            .AddCallback(() => this.FinishInteraction())
+            .Build();
+
+        this._dialogue.RunDialogue(dialog);
     }
 }

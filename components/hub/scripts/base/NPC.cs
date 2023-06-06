@@ -4,10 +4,11 @@ namespace Crygotchi;
 
 public abstract partial class NPC : Node3D
 {
-    private CryState _playerState;
+    protected CryState _playerState;
     private Area3D _triggerZone;
 
     private bool _isInteractable = false;
+    private bool _isInteracting = false;
 
     public override void _Ready()
     {
@@ -21,6 +22,7 @@ public abstract partial class NPC : Node3D
     public override void _Process(double delta)
     {
         if (!this._isInteractable) return;
+        if (this._isInteracting) return;
         if (!Input.IsActionJustPressed("cursor_action_primary")) return;
 
         GD.Print("[ NPC ] Requested interaction");
@@ -47,16 +49,17 @@ public abstract partial class NPC : Node3D
     {
         GD.Print("[ NPC ] Acquiring lock");
         this._playerState.AcquireBusyState();
+        this._isInteracting = true;
 
         GD.Print("[ NPC ] Init interaction");
         this.StartInteraction();
     }
 
-    protected abstract Task StartInteraction();
+    protected abstract void StartInteraction();
 
-    protected virtual Task FinishInteraction()
+    protected virtual void FinishInteraction()
     {
         this._playerState.ReleaseBusyState();
-        return Task.CompletedTask;
+        this._isInteracting = false;
     }
 }

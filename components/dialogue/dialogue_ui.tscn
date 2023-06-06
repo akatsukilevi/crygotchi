@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://bacav7euxfpyr"]
+
+[ext_resource type="Script" path="res://components/dialogue/scripts/DialogueUI.cs" id="1_s6xv3"]
+
+[node name="dialogue_ui" type="Control" node_paths=PackedStringArray("CharacterName", "Dialogue")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s6xv3")
+CharacterName = NodePath("Panel/Title/Label")
+Dialogue = NodePath("Panel/Content/RichTextLabel")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -225.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Title" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TWM"
+vertical_alignment = 1
+
+[node name="Content" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You've only got the one shot, So let it ride and let them leave
+They're living, breathing,  Not a slave to a broken machine
+You've only got the one shot, So hold it tight and best believe
+A heart that's beating can't belong to a broken machine"
