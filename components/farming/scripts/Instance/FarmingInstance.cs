@@ -10,6 +10,22 @@ public partial class FarmingInstance : RoomTileDecorationInstance
     private List<SeedEntry> _seeds = new();
     private FarmingTower _tower;
 
+    public override Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        Godot.Collections.Array<Variant> layers = new();
+        Godot.Collections.Array<Variant> seeds = new();
+
+        foreach (var layer in this._layers) layers.Add(layer.Serialize());
+        foreach (var seed in this._seeds) seeds.Add(seed.Serialize());
+
+        return new()
+        {
+            { "ID", this.ID },
+            { "Layers", layers },
+            { "Seeds", seeds },
+        };
+    }
+
     public FarmingInstance()
     {
         //* By start, it will have a single layer
@@ -98,4 +114,13 @@ public class SeedEntry
     public string Id { get; set; }
     public SeedItem Seed { get; set; }
     public int Amount { get; set; }
+
+    public Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        return new()
+        {
+            { "Id", this.Id },
+            { "Amount", this.Amount },
+        };
+    }
 }

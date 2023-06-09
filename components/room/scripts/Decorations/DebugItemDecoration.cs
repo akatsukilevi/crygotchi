@@ -11,7 +11,7 @@ public partial class DebugItemDecoration : RoomTileDecoration
 
     public override RoomTileDecorationInstance CreateInstance()
     {
-        return new()
+        return new RoomTileBaseDecorationInstance()
         {
             DecorationEntry = this,
             ID = this._id,

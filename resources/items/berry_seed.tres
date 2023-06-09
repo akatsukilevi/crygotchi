@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bccs3fhsh1hcm" path="res://resources/items/berry.tres" id="1_jpday"]
 [ext_resource type="Texture2D" uid="uid://dr7thqpvpri8e" path="res://assets/sprites/BerryBag.png" id="1_l1vl7"]
 [ext_resource type="PackedScene" uid="uid://c02u0kru16yg1" path="res://assets/items/Seed Bag.glb" id="2_wsfwd"]
-[ext_resource type="Script" path="res://models/Items/SeedItem.cs" id="3_7w7ax"]
+[ext_resource type="Script" path="res://models/Items/ItemTypes/SeedItem.cs" id="3_7w7ax"]
 
 [resource]
 script = ExtResource("3_7w7ax")

@@ -14,4 +14,15 @@ public partial class FarmingLayerInstance : Resource
         this.ThirdSlot = new();
         this.FourthSlot = new();
     }
+
+    public Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        return new()
+        {
+            { "FirstSlot", this.FirstSlot.Serialize() },
+            { "SecondSlot", this.SecondSlot.Serialize() },
+            { "ThirdSlot", this.ThirdSlot.Serialize() },
+            { "FourthSlot", this.FourthSlot.Serialize() },
+        };
+    }
 }

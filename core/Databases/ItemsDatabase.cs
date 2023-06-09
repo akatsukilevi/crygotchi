@@ -16,6 +16,12 @@ public partial class ItemsDatabase : Node
             var id = ResourceUid.IdToText(ResourceLoader.GetResourceUid(item.ResourcePath));
             var path = item.ResourcePath;
 
+            if (id.Contains("<invalid>"))
+            {
+                GD.PrintErr($"Invalid ID for tile {path}");
+                continue;
+            }
+
             if (this._items.ContainsKey(id))
             {
                 GD.PrintErr($"Cannot add duplicated item \"{id}\" ({path})");

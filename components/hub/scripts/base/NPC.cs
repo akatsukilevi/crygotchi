@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace Crygotchi;
 
 public abstract partial class NPC : Node3D

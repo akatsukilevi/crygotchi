@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://cob1musofbi4f"]
 
 [ext_resource type="Texture2D" uid="uid://b1uyk371n4ev6" path="res://assets/sprites/grass_icon.png" id="1_fs0ar"]
-[ext_resource type="Script" path="res://models/RoomTile.cs" id="2_jte1a"]
+[ext_resource type="Script" path="res://models/Room/RoomTile.cs" id="2_jte1a"]
 
 [resource]
 script = ExtResource("2_jte1a")

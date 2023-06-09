@@ -19,6 +19,12 @@ public partial class TilesDatabase : Node
             var id = ResourceUid.IdToText(ResourceLoader.GetResourceUid(item.ResourcePath));
             var path = item.ResourcePath;
 
+            if (id.Contains("<invalid>"))
+            {
+                GD.PrintErr($"Invalid ID for tile {path}");
+                continue;
+            }
+
             if (this._tiles.ContainsKey(id))
             {
                 GD.PrintErr($"Cannot add duplicated tile \"{id}\" ({path})");
@@ -49,7 +55,7 @@ public partial class TilesDatabase : Node
     {
         int amount = this._tiles.Count;
 
-        if (number >= amount) 
+        if (number >= amount)
             return 0;
 
         return number < 0 ? amount - 1 : number;
@@ -59,7 +65,7 @@ public partial class TilesDatabase : Node
     {
         int amount = this._decorations.Count;
 
-        if (number >= amount) 
+        if (number >= amount)
             return 0;
 
         return number < 0 ? amount - 1 : number;

@@ -29,6 +29,19 @@ public partial class FarmingSlot : Resource
     private Node3D Plant_Stage2;
     private Node3D Plant_Stage3;
 
+    public Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        return new()
+        {
+            { "Stage", (int)this._growth },
+            { "State", (int)this._state },
+            { "GrowthTime", this._growthTime },
+            { "DryTime", this._dryTime },
+            { "IsDry", this._isDry },
+            { "SeedID", this._seed },
+        };
+    }
+
     public void Setup(string Name, Node3D PotBase, Node3D LayerBase, PackedScene PlantPrefab)
     {
         var PlantA = PlantPrefab.Instantiate();

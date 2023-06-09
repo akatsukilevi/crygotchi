@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class RoomState : Node
 {
-    private readonly Dictionary<string, RoomTileInstance> _tiles = new();
+    private readonly Dictionary<Vector2, RoomTileInstance> _tiles = new();
     private RoomMode _mode = RoomMode.Exploring;
 
     private RoomTile _selectedBuilding = null;
@@ -32,6 +32,11 @@ public partial class RoomState : Node
         return this._mode;
     }
 
+    public Dictionary<Vector2, RoomTileInstance> GetTiles()
+    {
+        return this._tiles;
+    }
+
     public void SetMode(RoomMode newMode)
     {
         this._mode = newMode;
@@ -39,8 +44,8 @@ public partial class RoomState : Node
     }
 
     public RoomTileInstance GetTileAt(Vector2 position) =>
-        !this._tiles.ContainsKey($"{position.X},{position.Y}") ?
-            null : this._tiles[$"{position.X},{position.Y}"];
+        !this._tiles.ContainsKey(position) ?
+            null : this._tiles[position];
 
     public void NotifyUpdate() => this.OnStateChange?.Invoke();
     #endregion
@@ -61,7 +66,7 @@ public partial class RoomState : Node
     public RoomTileInstance PutTileAtPosition(Vector2 position)
     {
         //* Do not try to put a tile if already exists
-        if (this._tiles.ContainsKey($"{position.X},{position.Y}")) return null;
+        if (this._tiles.ContainsKey(position)) return null;
 
         var tile = new RoomTileInstance()
         {
@@ -70,17 +75,17 @@ public partial class RoomState : Node
             TileEntry = this._selectedBuilding,
         };
 
-        this._tiles[$"{position.X},{position.Y}"] = tile;
+        this._tiles[position] = tile;
         this.OnStateChange?.Invoke();
         return tile;
     }
 
     public void RemoveTileAtPosition(Vector2 position)
     {
-        if (!this._tiles.ContainsKey($"{position.X},{position.Y}")) return;
+        if (!this._tiles.ContainsKey(position)) return;
 
-        var toRemove = this._tiles[$"{position.X},{position.Y}"];
-        this._tiles.Remove($"{position.X},{position.Y}");
+        var toRemove = this._tiles[position];
+        this._tiles.Remove(position);
         toRemove.Dispose();
 
         this.OnStateChange?.Invoke();
@@ -131,11 +136,4 @@ public partial class RoomState : Node
         this.OnStateChange?.Invoke();
     }
     #endregion
-}
-
-public enum RoomMode
-{
-    Exploring,
-    Building,
-    Decorating,
 }

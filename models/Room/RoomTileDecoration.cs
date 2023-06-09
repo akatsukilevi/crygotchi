@@ -26,7 +26,7 @@ public abstract partial class RoomTileDecoration : Resource
 
     public virtual RoomTileDecorationInstance CreateInstance()
     {
-        return new() { ID = this._id, DecorationEntry = this };
+        return new RoomTileBaseDecorationInstance() { ID = this._id, DecorationEntry = this };
     }
 
     public virtual void Interact(RoomTileDecorationInstance instance, Node source)
