@@ -1,3 +1,5 @@
+using Godot.Collections;
+
 namespace Crygotchi;
 
 public partial class SaveManager : Node
@@ -6,10 +8,7 @@ public partial class SaveManager : Node
 
     private SaveGame _save = new SaveGame();
 
-    public SaveManager() : base()
-    {
-        // this.LoadSavegame();
-    }
+    public SaveManager() : base() { }
 
     public override void _Ready()
     {
@@ -22,7 +21,7 @@ public partial class SaveManager : Node
         base._Process(delta);
 
         //* If press F11, load
-        // if (Input.IsActionJustPressed("debug_load")) this.LoadSavegame();
+        if (Input.IsActionJustPressed("debug_load")) this.LoadSavegame();
         if (Input.IsActionJustPressed("debug_save")) this.WriteSavegame();
     }
 
@@ -33,26 +32,32 @@ public partial class SaveManager : Node
 
     public void LoadSavegame()
     {
-        var saveGame = GD.Load<SaveGame>(SaveManager.SavePath);
-        if (saveGame == null)
+        if (!FileAccess.FileExists(SaveManager.SavePath))
         {
-            GD.Print("No savegame found, instantiating a new one");
-            this._save = new SaveGame();
+            GD.PushWarning("No save file found");
             return;
         }
 
-        GD.Print("Game loaded from " + SaveManager.SavePath);
-        this._save = saveGame;
+        var saveFile = FileAccess.Open(SaveManager.SavePath, FileAccess.ModeFlags.Read);
+        this._save.DeserializeSave((Dictionary<string, Variant>)Json.ParseString(saveFile.GetAsText()));
     }
 
     public void WriteSavegame()
     {
-        this._save.UpdateSave();
+        try
+        {
+            this._save.UpdateSave();
 
-        var saveFile = FileAccess.Open(SaveManager.SavePath, FileAccess.ModeFlags.Write);
-        saveFile.StoreString(Json.Stringify(this._save.SerializeSave()));
+            var saveFile = FileAccess.Open(SaveManager.SavePath, FileAccess.ModeFlags.Write);
+            saveFile.StoreString(Json.Stringify(this._save.SerializeSave()));
 
-        GD.Print("Wrote save");
-        saveFile.Close();
+            GD.Print("Wrote save");
+            saveFile.Close();
+        }
+        catch (System.Exception err)
+        {
+            GD.PushError($"Failed to write save: {err}");
+            throw err;
+        }
     }
 }

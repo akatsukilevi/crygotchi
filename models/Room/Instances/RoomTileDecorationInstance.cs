@@ -15,4 +15,10 @@ public abstract partial class RoomTileDecorationInstance : Resource
             { "ID", this.ID },
         };
     }
+
+    public virtual void Deserialize(Dictionary<string, Variant> data, TilesDatabase tDB, ItemsDatabase iDB)
+    {
+        //* STUB implementation, will do nothing for standard static decorations
+        //* ID isn't being imported since it is set by the `CreateInstance` call
+    }
 }

@@ -19,6 +19,19 @@ public partial class ChestDecorationInstance : RoomTileDecorationInstance
         };
     }
 
+    public override void Deserialize(Godot.Collections.Dictionary<string, Variant> data, TilesDatabase tDB, ItemsDatabase iDB)
+    {
+        this._items.Clear();
+        var serializedItems = (Godot.Collections.Array<Variant>)data["Items"];
+
+        foreach (var item in serializedItems)
+        {
+            var deserialized = ItemEntry.Deserialize((Godot.Collections.Dictionary<string, Variant>)item);
+            deserialized.Item = iDB.GetItemById(deserialized.Id);
+            this._items.Add(deserialized);
+        }
+    }
+
     public ItemEntry[] GetItems()
     {
         return this._items.ToArray();
@@ -79,6 +92,15 @@ public class ItemEntry
         {
             { "Id", this.Id },
             { "Amount", this.Amount },
+        };
+    }
+
+    public static ItemEntry Deserialize(Godot.Collections.Dictionary<string, Variant> data)
+    {
+        return new()
+        {
+            Id = (string)data["Id"],
+            Amount = (int)data["Amount"],
         };
     }
 }

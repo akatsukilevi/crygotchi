@@ -4,11 +4,23 @@ public partial class CursorState : Node
 {
     private Vector2 Position = new(0, 0);
     private Item HeldItem = null;
+
     private bool _isBusy = false;
 
     public event EventHandler<CursorActionEventArgs> OnAction;
     public event Action OnStateChange;
     public event Action OnItemChange;
+
+    private ItemsDatabase _items;
+    private SaveGame _save;
+
+    public override void _Ready()
+    {
+        this._save = this.GetNode<SaveManager>("/root/SaveManager").GetSave();
+        this._items = this.GetNode<ItemsDatabase>("/root/ItemsDatabase");
+
+        this._save.OnSaveUpdated += this.OnSaveUpdated;
+    }
 
     public Vector2 GetPosition()
     {
@@ -68,6 +80,18 @@ public partial class CursorState : Node
     public Item PeekItem()
     {
         return this.HeldItem;
+    }
+
+    private void OnSaveUpdated()
+    {
+        var state = this._save.GetCursorSaveState();
+
+        this.Position = state.Position;
+        this.HeldItem = state.HeldItemID == null ? null : this._items.GetItemById(state.HeldItemID);
+        this._isBusy = false;
+
+        this.OnStateChange?.Invoke();
+        this.OnItemChange?.Invoke();
     }
 }
 
