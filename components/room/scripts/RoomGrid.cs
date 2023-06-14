@@ -34,7 +34,7 @@ public partial class RoomGrid : Node
         this._roomState.OnStateChange += this.OnStateChange;
         this._cursorState.OnAction += this.OnCursorAction;
 
-        this.OnStateChange();
+        this.OnStateChange(false);
     }
 
     #region "General"
@@ -72,8 +72,16 @@ public partial class RoomGrid : Node
         }
     }
 
-    private void OnStateChange()
+    private void OnStateChange(bool shouldResyncWithState)
     {
+        if (shouldResyncWithState)
+        {
+            foreach (var instance in this._instances) instance.Value.QueueFree();
+            this._instances.Clear();
+
+            foreach (var (position, tile) in this._roomState.GetTiles()) this.InstantiateTile(position, tile);
+        }
+
         switch (this._roomState.GetMode())
         {
             case RoomMode.Exploring:

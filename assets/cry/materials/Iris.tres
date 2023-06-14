@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://clx8t1clnf50r"]
+
+[ext_resource type="Texture2D" uid="uid://da80ib7fbi7rk" path="res://assets/cry/Cry_Iris.png" id="1_ok0bu"]
+
+[resource]
+resource_name = "Iris"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_ok0bu")
+metallic_specular = 0.0
+roughness = 0.0

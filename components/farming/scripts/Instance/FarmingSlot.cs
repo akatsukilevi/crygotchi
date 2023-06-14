@@ -7,6 +7,9 @@ public partial class FarmingSlot : Resource
     private float _growthTime = 0f;
     private float _dryTime = 0f;
     private bool _isDry = true;
+    private string _seedID;
+
+    //* Instance references
     private SeedItem _seed;
 
     //* Setup states
@@ -29,6 +32,29 @@ public partial class FarmingSlot : Resource
     private Node3D Plant_Stage2;
     private Node3D Plant_Stage3;
 
+    public Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        return new()
+        {
+            { "Stage", (int)this._growth },
+            { "State", (int)this._state },
+            { "GrowthTime", this._growthTime },
+            { "DryTime", this._dryTime },
+            { "IsDry", this._isDry },
+            { "SeedID", this._seedID },
+        };
+    }
+
+    public void Deserialize(Godot.Collections.Dictionary<string, Variant> data)
+    {
+        this._growth = (GrowthStage)((int)data["Stage"]);
+        this._state = (SlotState)((int)data["State"]);
+        this._growthTime = (float)data["GrowthTime"];
+        this._dryTime = (float)data["DryTime"];
+        this._isDry = (bool)data["IsDry"];
+        this._seedID = (string)data["SeedID"];
+    }
+
     public void Setup(string Name, Node3D PotBase, Node3D LayerBase, PackedScene PlantPrefab)
     {
         var PlantA = PlantPrefab.Instantiate();
@@ -42,6 +68,13 @@ public partial class FarmingSlot : Resource
         this.Plant_Stage1 = PlantA.GetNode<Node3D>("./Plant_Stage1");
         this.Plant_Stage2 = PlantA.GetNode<Node3D>("./Plant_Stage2");
         this.Plant_Stage3 = PlantA.GetNode<Node3D>("./Plant_Stage3");
+
+        if (this._seedID != null && this._seed == null)
+        {
+            //* Seed ID is set but seed isn't defined, should get from DB
+            var db = PotBase.GetNode<ItemsDatabase>("/root/ItemsDatabase");
+            this._seed = (SeedItem)db.GetItemById(this._seedID);
+        }
 
         this._hasSetupSlot = true;
     }
@@ -94,6 +127,7 @@ public partial class FarmingSlot : Resource
     {
         this._growthTime = seed.GrowthSeconds;
         this._growth = GrowthStage.Stage0;
+        this._seedID = seed.GetId();
         this._seed = seed;
 
         this._state = SlotState.Growing;
@@ -106,6 +140,7 @@ public partial class FarmingSlot : Resource
         this._growth = GrowthStage.Stage0;
         this._state = SlotState.Plantable;
         this._growthTime = 0f;
+        this._seedID = null;
         this._seed = null;
 
         return harvested;

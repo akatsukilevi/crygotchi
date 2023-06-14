@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://clq0eueak0yio"]
 
-[ext_resource type="Script" path="res://models/RoomTile.cs" id="1_edqm8"]
+[ext_resource type="Script" path="res://models/Room/RoomTile.cs" id="1_edqm8"]
 [ext_resource type="Texture2D" uid="uid://dic53qh40k1e2" path="res://assets/sprites/dirt_icon.png" id="1_qq0lw"]
 
 [resource]

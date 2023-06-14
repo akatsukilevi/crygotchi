@@ -7,18 +7,16 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_rffxy"]
+[sub_resource type="Sky" id="Sky_d2772"]
 sky_material = SubResource("ProceduralSkyMaterial_h2boy")
 radiance_size = 1
 
 [sub_resource type="Environment" id="Environment_87tnm"]
-background_mode = 2
-sky = SubResource("Sky_rffxy")
+background_mode = 1
+background_color = Color(0.270588, 0.270588, 0.270588, 1)
+sky = SubResource("Sky_d2772")
 ambient_light_source = 3
-tonemap_mode = 2
-ssao_enabled = true
-ssil_enabled = true
-glow_enabled = true
+reflected_light_source = 1
 glow_normalized = true
 
 [node name="Main Scene" type="Node3D"]
@@ -34,7 +32,8 @@ directional_shadow_mode = 1
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 30, -30)
 projection = 1
-size = 50.0
+current = true
+size = 40.0
 
 [node name="Cursor" parent="." instance=ExtResource("1_wbiw1")]
 

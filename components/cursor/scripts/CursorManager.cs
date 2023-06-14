@@ -54,7 +54,7 @@ public partial class CursorManager : Node
 
         this._cursorState.OnStateChange += OnStateUpdate;
         this._cursorState.OnItemChange += OnItemUpdate;
-        this._roomState.OnStateChange += OnStateUpdate;
+        this._roomState.OnStateChange += (bool _) => OnStateUpdate();
 
         this.OnStateUpdate();
     }

@@ -1,0 +1,182 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpfxnttam50q1"]
+
+[ext_resource type="PackedScene" uid="uid://day6q71y202t" path="res://components/hub/mesh/Hub.glb" id="1_othah"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lft5e"]
+size = Vector3(15.6103, 0.03, 3.36479)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfrqs"]
+size = Vector3(2.734, 25, 25)
+
+[node name="Hub" instance=ExtResource("1_othah")]
+
+[node name="Monorail Station" parent="." index="0" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Ceiling" parent="." index="1" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Stairs Right" parent="." index="2" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Stairs Left" parent="." index="3" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Plant Pots" parent="." index="4" groups=["Hub_NoCulling"]]
+
+[node name="Fountain" parent="." index="5" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Rail" parent="." index="6" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Stairs Right Border" parent="." index="7" groups=["Hub_NoCulling"]]
+
+[node name="Monorail Stairs Right Border001" parent="." index="8" groups=["Hub_NoCulling"]]
+
+[node name="bench" parent="." index="9" groups=["Hub_NoCulling"]]
+
+[node name="bench001" parent="." index="10" groups=["Hub_NoCulling"]]
+
+[node name="lantern" parent="." index="11" groups=["Hub_NoCulling"]]
+
+[node name="lantern001" parent="." index="12" groups=["Hub_NoCulling"]]
+
+[node name="lantern002" parent="." index="13" groups=["Hub_NoCulling"]]
+
+[node name="lantern003" parent="." index="14" groups=["Hub_NoCulling"]]
+
+[node name="lantern004" parent="." index="15" groups=["Hub_NoCulling"]]
+
+[node name="lantern005" parent="." index="16" groups=["Hub_NoCulling"]]
+
+[node name="lantern006" parent="." index="17" groups=["Hub_NoCulling"]]
+
+[node name="lantern007" parent="." index="18" groups=["Hub_NoCulling"]]
+
+[node name="lantern008" parent="." index="19" groups=["Hub_NoCulling"]]
+
+[node name="lantern009" parent="." index="20" groups=["Hub_NoCulling"]]
+
+[node name="lantern010" parent="." index="21" groups=["Hub_NoCulling"]]
+
+[node name="lantern011" parent="." index="22" groups=["Hub_NoCulling"]]
+
+[node name="lantern012" parent="." index="23" groups=["Hub_NoCulling"]]
+
+[node name="lantern013" parent="." index="24" groups=["Hub_NoCulling"]]
+
+[node name="lantern014" parent="." index="25" groups=["Hub_NoCulling"]]
+
+[node name="lantern015" parent="." index="26" groups=["Hub_NoCulling"]]
+
+[node name="lantern016" parent="." index="27" groups=["Hub_NoCulling"]]
+
+[node name="lantern017" parent="." index="28" groups=["Hub_NoCulling"]]
+
+[node name="lantern018" parent="." index="29" groups=["Hub_NoCulling"]]
+
+[node name="lantern019" parent="." index="30" groups=["Hub_NoCulling"]]
+
+[node name="lantern020" parent="." index="31" groups=["Hub_NoCulling"]]
+
+[node name="lantern021" parent="." index="32" groups=["Hub_NoCulling"]]
+
+[node name="lantern022" parent="." index="33" groups=["Hub_NoCulling"]]
+
+[node name="lantern023" parent="." index="34" groups=["Hub_NoCulling"]]
+
+[node name="lantern024" parent="." index="35" groups=["Hub_NoCulling"]]
+
+[node name="lantern025" parent="." index="36" groups=["Hub_NoCulling"]]
+
+[node name="lantern026" parent="." index="37" groups=["Hub_NoCulling"]]
+
+[node name="lantern027" parent="." index="38" groups=["Hub_NoCulling"]]
+
+[node name="lantern028" parent="." index="39" groups=["Hub_NoCulling"]]
+
+[node name="lantern029" parent="." index="40" groups=["Hub_NoCulling"]]
+
+[node name="lantern030" parent="." index="41" groups=["Hub_NoCulling"]]
+
+[node name="lantern031" parent="." index="42" groups=["Hub_NoCulling"]]
+
+[node name="soda" parent="." index="43" groups=["Hub_NoCulling"]]
+
+[node name="soda001" parent="." index="44" groups=["Hub_NoCulling"]]
+
+[node name="double_bin" parent="." index="45" groups=["Hub_NoCulling"]]
+
+[node name="blue_car" parent="." index="46" groups=["Hub_NoCulling"]]
+
+[node name="Road Base" parent="." index="49" groups=["Hub_NoCulling"]]
+
+[node name="CollisionShape3D" parent="Road Base/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011, 0.01, -0.012)
+shape = SubResource("BoxShape3D_lft5e")
+
+[node name="yellow_house" parent="." index="68" groups=["Hub_NoCulling"]]
+
+[node name="bakery" parent="." index="69" groups=["Hub_NoCulling"]]
+
+[node name="blue_house" parent="." index="70" groups=["Hub_NoCulling"]]
+
+[node name="coffe_shop" parent="." index="72" groups=["Hub_NoCulling"]]
+
+[node name="gas_sign" parent="." index="74" groups=["Hub_NoCulling"]]
+
+[node name="gas_station" parent="." index="75" groups=["Hub_NoCulling"]]
+
+[node name="gas_station_shop" parent="." index="76" groups=["Hub_NoCulling"]]
+
+[node name="green_house" parent="." index="77" groups=["Hub_NoCulling"]]
+
+[node name="market" parent="." index="80" groups=["Hub_NoCulling"]]
+
+[node name="pizzeria" parent="." index="81" groups=["Hub_NoCulling"]]
+
+[node name="car_light_green" parent="." index="83" groups=["Hub_NoCulling"]]
+
+[node name="car_light_green001" parent="." index="84" groups=["Hub_NoCulling"]]
+
+[node name="car_light_red" parent="." index="85" groups=["Hub_NoCulling"]]
+
+[node name="car_light_red001" parent="." index="86" groups=["Hub_NoCulling"]]
+
+[node name="light_green" parent="." index="87" groups=["Hub_NoCulling"]]
+
+[node name="light_green001" parent="." index="88" groups=["Hub_NoCulling"]]
+
+[node name="light_red" parent="." index="89" groups=["Hub_NoCulling"]]
+
+[node name="light_red001" parent="." index="90" groups=["Hub_NoCulling"]]
+
+[node name="OOB" type="StaticBody3D" parent="." index="91" groups=["Hub_NoCulling"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="OOB_Wall1" type="CollisionShape3D" parent="OOB" index="0" groups=["Hub_NoCulling"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall2" type="CollisionShape3D" parent="OOB" index="1" groups=["Hub_NoCulling"]]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 23)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall3" type="CollisionShape3D" parent="OOB" index="2" groups=["Hub_NoCulling"]]
+transform = Transform3D(-0.636805, 0, -0.771025, 0, 1, 0, 0.771025, 0, -0.636805, -18.5196, 0, 17)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall4" type="CollisionShape3D" parent="OOB" index="3" groups=["Hub_NoCulling"]]
+transform = Transform3D(0.651688, 0, -0.758487, 0, 1, 0, 0.758487, 0, 0.651688, 19.4825, 0, 17.6575)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall5" type="CollisionShape3D" parent="OOB" index="4" groups=["Hub_NoCulling"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -26)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall6" type="CollisionShape3D" parent="OOB" index="5" groups=["Hub_NoCulling"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall7" type="CollisionShape3D" parent="OOB" index="6" groups=["Hub_NoCulling"]]
+transform = Transform3D(0.555193, 0, -0.831722, 0, 1, 0, 0.831722, 0, 0.555193, -17.1647, 0, -18.7796)
+shape = SubResource("BoxShape3D_rfrqs")
+
+[node name="OOB_Wall8" type="CollisionShape3D" parent="OOB" index="7" groups=["Hub_NoCulling"]]
+transform = Transform3D(-0.659687, 0, -0.751541, 0, 1, 0, 0.751541, 0, -0.659687, 16.8353, 0, -20.5409)
+shape = SubResource("BoxShape3D_rfrqs")

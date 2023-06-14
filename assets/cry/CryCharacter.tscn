@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cku3kwh7mgtay"]
+
+[ext_resource type="PackedScene" uid="uid://b4ey53yudpa62" path="res://assets/cry/Cry.glb" id="1_f3dwh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6n2a1"]
+height = 2.25
+
+[node name="Cry" groups=["Hub_Player"] instance=ExtResource("1_f3dwh")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2" groups=["Hub_Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_6n2a1")

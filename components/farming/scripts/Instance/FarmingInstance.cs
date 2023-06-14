@@ -10,6 +10,47 @@ public partial class FarmingInstance : RoomTileDecorationInstance
     private List<SeedEntry> _seeds = new();
     private FarmingTower _tower;
 
+    public override Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        Godot.Collections.Array<Variant> layers = new();
+        Godot.Collections.Array<Variant> seeds = new();
+
+        foreach (var layer in this._layers) layers.Add(layer.Serialize());
+        foreach (var seed in this._seeds) seeds.Add(seed.Serialize());
+
+        return new()
+        {
+            { "ID", this.ID },
+            { "Layers", layers },
+            { "Seeds", seeds },
+        };
+    }
+
+    public override void Deserialize(Godot.Collections.Dictionary<string, Variant> data, TilesDatabase tDB, ItemsDatabase iDB)
+    {
+        var layers = (Godot.Collections.Array<Variant>)data["Layers"];
+        var seeds = (Godot.Collections.Array<Variant>)data["Seeds"];
+
+        this._layers.Clear();
+        this._seeds.Clear();
+
+        //* For each layer, deserialize it back into a proper layer
+        foreach (var layer in layers)
+        {
+            var deserialized = FarmingLayerInstance.Deserialize((Godot.Collections.Dictionary<string, Variant>)layer);
+            this._layers.Add(deserialized);
+        }
+
+        //* For each seed, deserialize it back into a proper seed
+        foreach (var seed in seeds)
+        {
+            var deserialized = SeedEntry.Deserialize((Godot.Collections.Dictionary<string, Variant>)seed);
+            deserialized.Seed = (SeedItem)iDB.GetItemById(deserialized.Id);
+
+            this._seeds.Add(deserialized);
+        }
+    }
+
     public FarmingInstance()
     {
         //* By start, it will have a single layer
@@ -98,4 +139,22 @@ public class SeedEntry
     public string Id { get; set; }
     public SeedItem Seed { get; set; }
     public int Amount { get; set; }
+
+    public Godot.Collections.Dictionary<string, Variant> Serialize()
+    {
+        return new()
+        {
+            { "Id", this.Id },
+            { "Amount", this.Amount },
+        };
+    }
+
+    public static SeedEntry Deserialize(Godot.Collections.Dictionary<string, Variant> data)
+    {
+        return new()
+        {
+            Id = (string)data["Id"],
+            Amount = (int)data["Amount"],
+        };
+    }
 }

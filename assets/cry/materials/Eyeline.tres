@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bgc2xnhg57s3u"]
+
+[ext_resource type="Texture2D" uid="uid://b2rr1khorg2wy" path="res://assets/cry/Cry_Eyeline.png" id="1_qpanw"]
+
+[resource]
+resource_name = "Eyeline"
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_qpanw")
+metallic_specular = 0.0
+roughness = 0.0
