@@ -14,3 +14,7 @@ If you see any asset that is not being properly credited, please do send a PR or
 > [Panku Console](https://github.com/Ark2000/PankuConsole)
 > **Author:** [Ark2000](https://github.com/Ark2000)
 > **License:** [MIT](https://github.com/Ark2000/PankuConsole/blob/master/LICENSE)
+
+> [Buttons](https://greenpixels.itch.io/pixel-art-asset-3)
+> **Author:** [greenpixels_](https://greenpixels.itch.io/)
+> **License:** [CC Attribution 4.0](http://creativecommons.org/licenses/by/4.0/)
