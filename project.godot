@@ -19,9 +19,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
-TilesDatabase="*res://core/Databases/TilesDatabase.cs"
-ItemsDatabase="*res://core/Databases/ItemsDatabase.cs"
-SaveManager="*res://core/Save/SaveManager.cs"
+TilesDatabase="*res://core/databases/TilesDatabase.cs"
+ItemsDatabase="*res://core/databases/ItemsDatabase.cs"
+SaveManager="*res://core/save/SaveManager.cs"
 DialogueService="*res://components/dialogue/scripts/DialogueService.cs"
 RoomState="*res://components/room/scripts/RoomState.cs"
 CursorState="*res://components/cursor/scripts/CursorState.cs"

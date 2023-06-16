@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://db0pqjv5ypxqr" path="res://assets/items/Berry.glb" id="1_t4uy5"]
 [ext_resource type="Texture2D" uid="uid://c21eh5xee2x0y" path="res://assets/sprites/Berry.png" id="1_yo2dv"]
-[ext_resource type="Script" path="res://models/Items/ItemTypes/FoodItem.cs" id="2_yag7i"]
+[ext_resource type="Script" path="res://models/items/item_types/FoodItem.cs" id="2_yag7i"]
 
 [resource]
 script = ExtResource("2_yag7i")
