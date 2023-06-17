@@ -94,7 +94,6 @@ public partial class TilesDatabase : Node
 
     public RoomTileDecoration GetDecorationByIndex(int index)
     {
-        GD.Print("Attempting to get decoration at index " + index);
         return this._decorations.ElementAt(index).Value;
     }
 }

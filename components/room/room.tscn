@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://kywqnwtrcbla"]
+[gd_scene load_steps=11 format=3 uid="uid://kywqnwtrcbla"]
 
 [ext_resource type="Script" path="res://components/room/scripts/RoomGrid.cs" id="1_csw4a"]
 [ext_resource type="PackedScene" uid="uid://cnyv4f1mde1iy" path="res://components/room/room_tile.tscn" id="2_bbivq"]
 [ext_resource type="Texture2D" uid="uid://cs78rhvv6eht7" path="res://components/room/sprites/Icon_ExploreMode.png" id="3_j6s7e"]
 [ext_resource type="Texture2D" uid="uid://cdfmfcf4clcfa" path="res://components/room/sprites/Icon_BuildMode.png" id="4_xh4e6"]
-[ext_resource type="Script" path="res://components/room/scripts/RoomInput.cs" id="5_calfy"]
 [ext_resource type="Texture2D" uid="uid://c31sxr3shx45a" path="res://components/room/sprites/Icon_DecorationMode.png" id="5_spqnk"]
 [ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="6_5ybjf"]
 
@@ -46,9 +45,6 @@ ExploringSprite = ExtResource("3_j6s7e")
 BuildingSprite = ExtResource("4_xh4e6")
 DecoratingSprite = ExtResource("5_spqnk")
 metadata/_edit_vertical_guides_ = [-545.0]
-
-[node name="Input" type="Node" parent="."]
-script = ExtResource("5_calfy")
 
 [node name="Tiles" type="Node3D" parent="."]
 

@@ -44,20 +44,12 @@ public partial class SaveManager : Node
 
     public void WriteSavegame()
     {
-        try
-        {
-            this._save.UpdateSave();
+        this._save.UpdateSave();
 
-            var saveFile = FileAccess.Open(SaveManager.SavePath, FileAccess.ModeFlags.Write);
-            saveFile.StoreString(Json.Stringify(this._save.SerializeSave()));
+        var saveFile = FileAccess.Open(SaveManager.SavePath, FileAccess.ModeFlags.Write);
+        saveFile.StoreString(Json.Stringify(this._save.SerializeSave()));
 
-            GD.Print("Wrote save");
-            saveFile.Close();
-        }
-        catch (System.Exception err)
-        {
-            GD.PushError($"Failed to write save: {err}");
-            throw err;
-        }
+        GD.Print("Wrote save");
+        saveFile.Close();
     }
 }

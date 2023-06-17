@@ -1,9 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2n6v1casgyqk"]
+[gd_scene load_steps=9 format=3 uid="uid://c2n6v1casgyqk"]
 
-[ext_resource type="Texture2D" uid="uid://bhmnjipegx78d" path="res://core/on_screen_controls/keys/ps4/CONTROLPAD.png" id="1_bqmga"]
 [ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="1_mld88"]
 [ext_resource type="Script" path="res://core/on_screen_controls/scripts/OSCController.cs" id="1_tnnch"]
-[ext_resource type="Texture2D" uid="uid://blagr7yhapia4" path="res://core/on_screen_controls/keys/ps4/X.png" id="2_q3wxu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nojkx"]
 
@@ -17,7 +15,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osglc"]
 
-[node name="on_screen_controls" type="VBoxContainer"]
+[node name="on_screen_controls" type="VBoxContainer" node_paths=PackedStringArray("Controls")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 script = ExtResource("1_tnnch")
+Controls = NodePath("ItemList")
 
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
@@ -48,10 +47,5 @@ theme_override_styles/cursor = SubResource("StyleBoxEmpty_sianl")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_osglc")
 auto_height = true
 text_overrun_behavior = 0
-item_count = 2
 max_columns = 25
 fixed_icon_size = Vector2i(32, 32)
-item_0/text = "Move"
-item_0/icon = ExtResource("1_bqmga")
-item_1/text = "Place Block"
-item_1/icon = ExtResource("2_q3wxu")

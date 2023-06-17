@@ -32,7 +32,7 @@ public partial class RoomGrid : Node
         this._roomState = this.GetNode<RoomState>("/root/RoomState");
 
         this._roomState.OnStateChange += this.OnStateChange;
-        this._cursorState.OnAction += this.OnCursorAction;
+        this._roomState.OnInteract += this.OnCursorAction;
 
         this.OnStateChange(false);
     }
@@ -54,10 +54,8 @@ public partial class RoomGrid : Node
         }
     }
 
-    private void OnCursorAction(object sender, CursorActionEventArgs e)
+    private void OnCursorAction()
     {
-        if (e.Action != ActionType.Primary) return;
-
         switch (this._roomState.GetMode())
         {
             case RoomMode.Exploring:
