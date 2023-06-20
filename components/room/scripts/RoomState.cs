@@ -102,7 +102,11 @@ public partial class RoomState : Node
         {
             input.Add(new OSC()
             {
-                OnActivate = () => this.OnInteract?.Invoke(),
+                OnActivate = () =>
+                {
+                    this.GetNode<OSCController>("/root/OSCController").ClearOSC();
+                    this.OnInteract?.Invoke();
+                },
                 Name = "Interact",
                 Key = OSCKey.Primary,
             });
@@ -235,7 +239,7 @@ public partial class RoomState : Node
         {
             OnActivate = () => this.OnInteract?.Invoke(),
             Name = currentHovering.Decoration != null ? "Remove Decoration" : "Place Decoration",
-            Key = OSCKey.Tertiary,
+            Key = OSCKey.Primary,
         });
 
         return input.ToArray();

@@ -1,5 +1,8 @@
 namespace Crygotchi;
 
+// TODO: Better Cry Input handling
+//! Cry controls shouldn't be hardcoded like it is now
+
 public partial class CryController : CharacterBody3D
 {
     [ExportCategory("Character Controller")]
@@ -31,7 +34,7 @@ public partial class CryController : CharacterBody3D
         if (this._state.IsBusy()) return;
 
         this._inputDirection = GetInputDirection();
-        this._isRunning = Input.IsActionPressed("cry_sprint");
+        this._isRunning = Input.IsKeyPressed(Key.Shift);
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -63,9 +66,9 @@ public partial class CryController : CharacterBody3D
     private Vector3 GetInputDirection()
     {
         return new Vector3(
-            Input.GetActionStrength("cursor_right") - Input.GetActionStrength("cursor_left"),
+            Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left"),
             0.0f,
-            Input.GetActionStrength("cursor_down") - Input.GetActionStrength("cursor_up")
+            Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up")
         );
     }
 

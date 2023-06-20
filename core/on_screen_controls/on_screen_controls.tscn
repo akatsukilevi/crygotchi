@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2n6v1casgyqk"]
+[gd_scene load_steps=10 format=3 uid="uid://c2n6v1casgyqk"]
 
 [ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="1_mld88"]
 [ext_resource type="Script" path="res://core/on_screen_controls/scripts/OSCController.cs" id="1_tnnch"]
+[ext_resource type="Texture2D" uid="uid://b3iafdmclhdit" path="res://addons/controller_icons/assets/xboxone/dpad.png" id="2_8qnir"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nojkx"]
 
@@ -28,6 +29,7 @@ grow_vertical = 2
 alignment = 2
 script = ExtResource("1_tnnch")
 Controls = NodePath("ItemList")
+DpadIcon = ExtResource("2_8qnir")
 
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2

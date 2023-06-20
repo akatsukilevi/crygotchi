@@ -7,7 +7,7 @@ public class OSC
     public Action OnActivate;
 }
 
-public class TypedOSC<T> : OSC
+public class DirectionalOSC : OSC
 {
-    public new Action<T> OnActivate;
+    public new Action<Vector2> OnActivate;
 }

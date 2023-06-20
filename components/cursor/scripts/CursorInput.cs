@@ -24,15 +24,17 @@ public partial class CursorInput : Node
 
     private void UpdateOSC()
     {
+        if (this._cursorState.IsBusy()) return;
+
         var position = this._cursorState.GetPosition();
         var input = this._roomState.GetInput(position);
 
         var osc = new List<OSC>()
         {
-            new TypedOSC<Vector2>()
+            new DirectionalOSC()
             {
                 Key = OSCKey.Axis,
-                OnActivate = this.OnMove,
+                OnActivate = (Vector2 delta) => this.OnMove(delta),
                 Name = "Move",
             }
         };
@@ -46,18 +48,5 @@ public partial class CursorInput : Node
     {
         var pos = this._cursorState.GetPosition();
         this._cursorState.SetPosition(pos + delta);
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (this._cursorState.IsBusy()) return;
-
-        var pos = this._cursorState.GetPosition();
-
-        if (Input.IsActionJustPressed("cursor_action_primary"))
-            this._cursorState.CursorActionPressed(ActionType.Primary);
-
-        if (Input.IsActionJustPressed("cursor_action_secondary"))
-            this._cursorState.CursorActionPressed(ActionType.Secondary);
     }
 }

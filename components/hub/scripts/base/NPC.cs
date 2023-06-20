@@ -4,6 +4,7 @@ public abstract partial class NPC : Node3D
 {
     protected CryState _playerState;
     private Area3D _triggerZone;
+    private OSCController _osc;
 
     private bool _isInteractable = false;
     private bool _isInteracting = false;
@@ -12,19 +13,28 @@ public abstract partial class NPC : Node3D
     {
         this._triggerZone = this.GetNode<Area3D>("./TriggerZone");
         this._playerState = this.GetNode<CryState>("/root/CryState");
+        this._osc = this.GetNode<OSCController>("/root/OSCController");
 
         this._triggerZone.AreaEntered += OnAreaCullEntered;
         this._triggerZone.AreaExited += OnAreaCullExited;
     }
 
-    public override void _Process(double delta)
+    private void UpdateInput()
     {
-        if (!this._isInteractable) return;
         if (this._isInteracting) return;
-        if (!Input.IsActionJustPressed("cursor_action_primary")) return;
+        if (!this._isInteractable)
+        {
+            this._osc.ClearOSC();
+            return;
+        }
 
-        GD.Print("[ NPC ] Requested interaction");
-        this.Interact();
+        this._osc.RegisterOSC(new OSC[] {
+            new() {
+                Key = OSCKey.Primary,
+                Name = "Interact",
+                OnActivate = this.Interact
+            }
+        });
     }
 
     private void OnAreaCullEntered(Area3D collider)
@@ -41,6 +51,7 @@ public abstract partial class NPC : Node3D
 
         GD.Print("[ NPC ] Detected player far!");
         this._isInteractable = false;
+        this.UpdateInput();
     }
 
     private void Interact()
@@ -48,6 +59,7 @@ public abstract partial class NPC : Node3D
         GD.Print("[ NPC ] Acquiring lock");
         this._playerState.AcquireBusyState();
         this._isInteracting = true;
+        this.UpdateInput();
 
         GD.Print("[ NPC ] Init interaction");
         this.StartInteraction();
@@ -59,5 +71,6 @@ public abstract partial class NPC : Node3D
     {
         this._playerState.ReleaseBusyState();
         this._isInteracting = false;
+        this.UpdateInput();
     }
 }

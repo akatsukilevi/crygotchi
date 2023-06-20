@@ -9,9 +9,16 @@ public partial class DialogueUI : Control
     [Export] public RichTextLabel Dialogue;
 
     private List<DialogueStep> _steps;
+    private OSCController _osc;
 
     private bool _isSetup = false;
     private int _count = 0;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        this._osc = this.GetNode<OSCController>("/root/OSCController");
+    }
 
     public void Setup(List<DialogueStep> steps)
     {
@@ -21,13 +28,17 @@ public partial class DialogueUI : Control
         this._isSetup = true;
     }
 
-    public override void _Process(double delta)
+    private void ProcessInput()
     {
-        if (!this._isSetup) return;
-        if (!Input.IsActionJustPressed("cursor_action_primary")) return;
-
-        //* Should iterate to the next one
-        this.NextStep();
+        this._osc.RegisterOSC(new OSC[]
+        {
+            new()
+            {
+                Name = "Next",
+                Key = OSCKey.Primary,
+                OnActivate = this.NextStep
+            }
+        });
     }
 
     private void NextStep()
@@ -56,6 +67,8 @@ public partial class DialogueUI : Control
                 this.NextStep(); //* Will continue to the next one since actions have no dialogues
                 break;
         }
+
+        this.ProcessInput();
     }
 
     private void Finish()

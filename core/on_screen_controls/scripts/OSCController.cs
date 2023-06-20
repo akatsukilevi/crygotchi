@@ -6,56 +6,113 @@ public partial class OSCController : VBoxContainer
 {
     [ExportCategory("References")]
     [Export] public ItemList Controls;
+    [Export] public Texture2D DpadIcon;
 
-    private Dictionary<OSCKey, Action<object>> _listeners = new();
+    private Dictionary<string, Action<object>> _listeners = new();
+    private bool _isSetup = false;
+    private Node _controllerIcons;
+
+    public override void _Ready()
+    {
+        base._Ready();
+
+        this._controllerIcons = this.GetNode("/root/ControllerIcons");
+    }
 
     public void RegisterOSC(OSC[] keys)
     {
-        this._listeners.Clear();
+        var newKeys = new Dictionary<string, Action<object>>();
+        this._isSetup = false;
         this.Controls.Clear();
 
-        foreach (var key in keys)
+        foreach (var input in keys)
         {
-            this.Controls.AddItem(key.Name);
+            var input_name = this.KeyToInput(input.Key);
+            var input_icon = this.GetKeyIcon(input.Key);
 
-            if (key is TypedOSC<object>)
+            if (newKeys.ContainsKey(input_name))
             {
-                this._listeners.Add(key.Key, (x) => (key as TypedOSC<object>).OnActivate(x));
+                GD.PrintErr($"Attempted to register duplicated input ${input_name}: {input.Name}");
                 continue;
             }
 
-            this._listeners.Add(key.Key, (_) => key.OnActivate());
+            this.Controls.AddItem(input.Name, input_icon);
+
+            if (input is DirectionalOSC)
+            {
+                newKeys.Add(input_name, (x) => (input as DirectionalOSC).OnActivate?.Invoke((Vector2)x));
+                continue;
+            }
+
+            newKeys.Add(input_name, (_) => input.OnActivate?.Invoke());
         }
+
+        this._listeners = newKeys;
+        this._isSetup = true;
+    }
+
+    public void ClearOSC()
+    {
+        this._isSetup = false;
+        this.Controls.Clear();
+        this._listeners.Clear();
+        this._isSetup = true;
     }
 
     public override void _Input(InputEvent @event)
     {
         base._Input(@event);
+        if (!this._isSetup) return;
 
-        if (Input.IsPhysicalKeyPressed(Key.Space))
+        //* Default keys
+        var keys = this._listeners.Keys;
+        foreach (var input in keys)
         {
-            if (this._listeners.TryGetValue(OSCKey.Primary, out Action<object> handler)) handler.Invoke(null);
+            if (input == "input_axis" || !@event.IsActionReleased(input)) continue;
+            this._listeners[input].Invoke(null);
         }
 
-        if (Input.IsPhysicalKeyPressed(Key.Backspace))
+        //* Grab the DPAD keys
+        Vector2 dpad = this.CheckDPAD(@event);
+        if (dpad != Vector2.Zero)
         {
-            if (this._listeners.TryGetValue(OSCKey.Secondary, out Action<object> handler)) handler.Invoke(null);
+            if (!this._listeners.TryGetValue("input_axis", out Action<object> handle)) return;
+            handle.Invoke(dpad);
         }
+    }
 
-        if (Input.IsPhysicalKeyPressed(Key.Tab))
-        {
-            if (this._listeners.TryGetValue(OSCKey.Tertiary, out Action<object> handler)) handler.Invoke(null);
-        }
+    private Texture2D GetKeyIcon(OSCKey key)
+    {
+        if (key == OSCKey.Axis) return this.DpadIcon;
 
-        if (Input.IsPhysicalKeyPressed(Key.Q))
-        {
-            if (this._listeners.TryGetValue(OSCKey.ShiftLeft, out Action<object> handler)) handler.Invoke(null);
-        }
+        return (Texture2D)this._controllerIcons.Call("parse_path", this.KeyToInput(key));
+    }
 
-        if (Input.IsPhysicalKeyPressed(Key.E))
+    private Vector2 CheckDPAD(InputEvent @event)
+    {
+        Vector2 input = Vector2.Zero;
+
+        if (@event.IsActionPressed("input_axis_up")) input += new Vector2(0, 1);
+        if (@event.IsActionPressed("input_axis_down")) input += new Vector2(0, -1);
+        if (@event.IsActionPressed("input_axis_left")) input += new Vector2(1, 0);
+        if (@event.IsActionPressed("input_axis_right")) input += new Vector2(-1, 0);
+
+        return input;
+    }
+
+    private string KeyToInput(OSCKey key)
+    {
+        return key switch
         {
-            if (this._listeners.TryGetValue(OSCKey.ShiftRight, out Action<object> handler)) handler.Invoke(null);
-        }
+            OSCKey.Primary => "input_primary",
+            OSCKey.Secondary => "input_secondary",
+            OSCKey.Tertiary => "input_tertiary",
+            OSCKey.Cancel => "ui_cancel",
+            OSCKey.Axis => "input_axis",
+            OSCKey.ShiftLeft => "input_shift_left",
+            OSCKey.ShiftRight => "input_shift_right",
+            _ => "input_tertiary"
+        };
     }
 }
 
@@ -64,8 +121,9 @@ public enum OSCKey
 {
     Primary = 1,
     Secondary = 2,
-    Tertiary = 3,
-    Axis = 4,
-    ShiftLeft = 5,
-    ShiftRight = 6,
+    Cancel = 3,
+    Tertiary = 4,
+    Axis = 5,
+    ShiftLeft = 6,
+    ShiftRight = 7,
 }
