@@ -6,6 +6,7 @@ public partial class StoragePopup : Node
 
     private ChestDecorationInstance _storage;
     private CursorState _cursorState;
+    private OSCController _osc;
     private bool _hasSetup = false;
 
     private ItemEntry[] _items;
@@ -14,6 +15,7 @@ public partial class StoragePopup : Node
     {
         base._Ready();
         this._cursorState = this.GetNode<CursorState>("/root/CursorState");
+        this._osc = this.GetNode<OSCController>("/root/OSCController");
         this._cursorState.SetBusy(true);
     }
 
@@ -38,6 +40,14 @@ public partial class StoragePopup : Node
         //* Add event hooks
         this.List.ItemActivated += OnActivated;
 
+        this._osc.RegisterOSC(new OSC[] {
+            new() {
+                Key = OSCKey.Cancel,
+                Name = "Close",
+                OnActivate = this.Close
+            }
+        });
+
         this._hasSetup = true;
     }
 
@@ -49,14 +59,6 @@ public partial class StoragePopup : Node
         var item = this._storage.TakeItem(selected.Id);
         this._cursorState.HoldItem(item);
         this.Close();
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        base._Input(@event);
-        if (!this._hasSetup) return;
-
-        if (Input.IsActionJustPressed("ui_cancel")) this.Close();
     }
 
     private void Close()

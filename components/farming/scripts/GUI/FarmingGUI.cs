@@ -20,12 +20,14 @@ public partial class FarmingGUI : Panel
     private FarmingInstance _instance;
     private CursorState _cursorState;
     private FarmingTower _tower;
+    private OSCController _osc;
 
     public override void _Ready()
     {
         base._Ready();
 
         this._cursorState = this.GetNode<CursorState>("/root/CursorState");
+        this._osc = this.GetNode<OSCController>("/root/OSCController");
         this._cursorState.SetBusy(true);
     }
 
@@ -52,53 +54,73 @@ public partial class FarmingGUI : Panel
         //* Initial input & Finish setup
         this.SetupDetails();
         this.OnInputChange(Vector2.Zero);
+
         this._hasSetup = true;
+        this.ProcessInput();
     }
 
-    public override void _Input(InputEvent @event)
+    private void ProcessInput()
     {
-        base._Input(@event);
         if (!this._hasSetup) return;
 
-        //* Global actions
-        if (Input.IsActionJustPressed("ui_cancel")) this._shouldClose = true;
-
-        //* Tooling actions
-        if (Input.IsActionJustPressed("cursor_action_primary"))
+        var keys = new List<OSC>()
         {
-            switch (this._tool)
-            {
-                case Tool.Trowel:
-                    this.InteractTrowel();
-                    break;
-                case Tool.WaterCan:
-                    this.InteractWaterCan();
-                    break;
+            new() {
+                Key = OSCKey.Cancel,
+                Name = "Close",
+                OnActivate = () => {
+                    this._shouldClose = true;
+                }
+            },
+            new() {
+                Key = OSCKey.Primary,
+                Name = this._tool == Tool.Trowel ? "Plant" : "Water",
+                OnActivate = () => {
+                    switch (this._tool)
+                    {
+                        case Tool.Trowel:
+                            this.InteractTrowel();
+                            break;
+                        case Tool.WaterCan:
+                            this.InteractWaterCan();
+                            break;
+                    }
+                }
             }
+        };
+
+        if (this._tool == Tool.Trowel && this._isStorageOpen)
+        {
+            keys.Add(new()
+            {
+                Key = OSCKey.Secondary,
+                Name = "Cancel Planting",
+                OnActivate = this.CancelTrowel
+            });
         }
 
-        //* Tooling actions cancelling
-        if (Input.IsActionJustPressed("cursor_action_secondary"))
+        if (!this._isStorageOpen)
         {
-            switch (this._tool)
-            {
-                case Tool.Trowel:
-                    this.CancelTrowel();
-                    break;
-            }
+            keys.AddRange(new OSC[] {
+                new DirectionalOSC() {
+                    Key = OSCKey.Axis,
+                    Name = "Move",
+                    OnActivate = this.OnInputChange
+                },
+                new OSC() {
+                    Key = OSCKey.ShiftLeft,
+                    Name = "Previous Tool",
+                    OnActivate = this.SwitchTool
+                },
+                new OSC() {
+                    Key = OSCKey.ShiftRight,
+                    Name = "Next Tool",
+                    OnActivate = this.SwitchTool
+                }
+            });
         }
 
-        if (this._isStorageOpen) return;
-
-        //* Movement
-        if (Input.IsActionJustPressed("cursor_up")) this.OnInputChange(new Vector2(0, 1));
-        if (Input.IsActionJustPressed("cursor_down")) this.OnInputChange(new Vector2(0, -1));
-        if (Input.IsActionJustPressed("cursor_left")) this.OnInputChange(new Vector2(-1, 0));
-        if (Input.IsActionJustPressed("cursor_right")) this.OnInputChange(new Vector2(1, 0));
-
-        //* Tooling switching
-        if (Input.IsActionJustPressed("room_mode_tile_previous")) this.SwitchTool();
-        if (Input.IsActionJustPressed("room_mode_tile_next")) this.SwitchTool();
+        this._osc.RegisterOSC(keys.ToArray());
     }
 
     public override void _Process(double delta)
@@ -138,6 +160,8 @@ public partial class FarmingGUI : Panel
             Tool.Trowel => Tool.WaterCan,
             _ => Tool.Trowel
         };
+
+        this.ProcessInput();
     }
 
     private void InteractTrowel()
@@ -255,6 +279,8 @@ public partial class FarmingGUI : Panel
         //* Should change what is focused here
         this._focused += input;
         this._focused = this._tower.ClampInput(this._focused);
+
+        this.ProcessInput();
         this.UpdateDetails();
     }
 

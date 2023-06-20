@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2n6v1casgyqk"]
+
+[ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="1_mld88"]
+[ext_resource type="Script" path="res://core/on_screen_controls/scripts/OSCController.cs" id="1_tnnch"]
+[ext_resource type="Texture2D" uid="uid://b3iafdmclhdit" path="res://addons/controller_icons/assets/xboxone/dpad.png" id="2_8qnir"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nojkx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywra6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e7ncw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5wsj3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sianl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osglc"]
+
+[node name="on_screen_controls" type="VBoxContainer" node_paths=PackedStringArray("Controls")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+script = ExtResource("1_tnnch")
+Controls = NodePath("ItemList")
+DpadIcon = ExtResource("2_8qnir")
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/icon_margin = 5
+theme_override_constants/line_separation = 0
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("1_mld88")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nojkx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ywra6")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_e7ncw")
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_5wsj3")
+theme_override_styles/cursor = SubResource("StyleBoxEmpty_sianl")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_osglc")
+auto_height = true
+text_overrun_behavior = 0
+max_columns = 25
+fixed_icon_size = Vector2i(32, 32)

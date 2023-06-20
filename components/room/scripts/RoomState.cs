@@ -14,6 +14,7 @@ public partial class RoomState : Node
     private int _selectedDecoratingIndex = 0;
 
     public event Action<bool> OnStateChange;
+    public event Action OnInteract;
 
     private TilesDatabase _tilesDatabase;
     private SaveGame _save;
@@ -53,10 +54,102 @@ public partial class RoomState : Node
         !this._tiles.ContainsKey(position) ?
             null : this._tiles[position];
 
+    public OSC[] GetInput(Vector2 cursorPosition)
+    {
+        switch (this._mode)
+        {
+            case RoomMode.Building:
+                return this.GetBuildingModeInput(cursorPosition);
+            case RoomMode.Decorating:
+                return this.GetDecorationModeInput(cursorPosition);
+            default:
+                return this.GetExploringModeInput(cursorPosition);
+        }
+    }
+
     public void NotifyUpdate() => this.OnStateChange?.Invoke(false);
+
+    private void OnSaveUpdated()
+    {
+        var state = this._save.GetRoomSaveState();
+
+        this._tiles.Clear();
+        foreach (var (k, v) in state.Tiles)
+        {
+            //* Should somehow tell the manager "hey, missing stuff here"
+            this._tiles.Add(k, v);
+        }
+
+        this.OnStateChange?.Invoke(true);
+    }
+    #endregion
+
+    #region "Exploring Mode"
+    private OSC[] GetExploringModeInput(Vector2 cursorPosition)
+    {
+        var currentHovering = this.GetTileAt(cursorPosition);
+        var input = new List<OSC>()
+        {
+            new OSC()
+            {
+                OnActivate = () => this.SetMode(RoomMode.Building),
+                Name = "Switch to Building Mode",
+                Key = OSCKey.Tertiary,
+            }
+        };
+
+        if (currentHovering?.Decoration?.DecorationEntry?.IsInteractable == true)
+        {
+            input.Add(new OSC()
+            {
+                OnActivate = () =>
+                {
+                    this.GetNode<OSCController>("/root/OSCController").ClearOSC();
+                    this.OnInteract?.Invoke();
+                },
+                Name = "Interact",
+                Key = OSCKey.Primary,
+            });
+        }
+
+        return input.ToArray();
+    }
     #endregion
 
     #region "Building Mode"
+    private OSC[] GetBuildingModeInput(Vector2 cursorPosition)
+    {
+        var currentHovering = this.GetTileAt(cursorPosition);
+        var input = new List<OSC>()
+        {
+            new OSC()
+            {
+                OnActivate = () => this.SetMode(RoomMode.Decorating),
+                Name = "Switch to Decorating Mode",
+                Key = OSCKey.Tertiary,
+            },
+            new OSC()
+            {
+                OnActivate = () => this.OnInteract?.Invoke(),
+                Name = currentHovering == null ? "Build Tile" : "Remove Tile",
+                Key = OSCKey.Primary,
+            },
+            new OSC()
+            {
+                OnActivate = this.NextSelectedBuilding,
+                Name = "Next Tile",
+                Key = OSCKey.ShiftRight,
+            },
+            new OSC()
+            {
+                OnActivate = this.PreviousSelectedBuilding,
+                Name = "Previous Tile",
+                Key = OSCKey.ShiftLeft,
+            }
+        };
+
+        return input.ToArray();
+    }
 
     public RoomTile GetSelectedBuilding()
     {
@@ -115,6 +208,43 @@ public partial class RoomState : Node
     #endregion
 
     #region "Decorating Mode"
+    private OSC[] GetDecorationModeInput(Vector2 cursorPosition)
+    {
+        var currentHovering = this.GetTileAt(cursorPosition);
+        var input = new List<OSC>()
+        {
+            new OSC()
+            {
+                OnActivate = () => this.SetMode(RoomMode.Exploring),
+                Name = "Switch to Exploring Mode",
+                Key = OSCKey.Tertiary,
+            },
+            new OSC()
+            {
+                OnActivate = this.NextSelectedDecorating,
+                Name = "Next Decoration",
+                Key = OSCKey.ShiftRight,
+            },
+            new OSC()
+            {
+                OnActivate = this.PreviousSelectedDecorating,
+                Name = "Previous Decoration",
+                Key = OSCKey.ShiftLeft,
+            }
+        };
+
+        if (currentHovering == null) return input.ToArray();
+
+        input.Add(new OSC()
+        {
+            OnActivate = () => this.OnInteract?.Invoke(),
+            Name = currentHovering.Decoration != null ? "Remove Decoration" : "Place Decoration",
+            Key = OSCKey.Primary,
+        });
+
+        return input.ToArray();
+    }
+
     public RoomTileDecoration GetSelectedDecorating()
     {
         return this._selectedDecorating;
@@ -142,18 +272,4 @@ public partial class RoomState : Node
         this.OnStateChange?.Invoke(false);
     }
     #endregion
-
-    private void OnSaveUpdated()
-    {
-        var state = this._save.GetRoomSaveState();
-
-        this._tiles.Clear();
-        foreach (var (k, v) in state.Tiles)
-        {
-            //* Should somehow tell the manager "hey, missing stuff here"
-            this._tiles.Add(k, v);
-        }
-
-        this.OnStateChange?.Invoke(true);
-    }
 }

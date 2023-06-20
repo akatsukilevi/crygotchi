@@ -1,37 +1,52 @@
+using System.Collections.Generic;
+
 namespace Crygotchi;
 
 public partial class CursorInput : Node
 {
-    private CursorState _state;
+    private CursorState _cursorState;
+    private RoomState _roomState;
+    private OSCController _osc;
 
     public override void _Ready()
     {
         base._Ready();
-        this._state = GetNode<CursorState>("/root/CursorState");
+
+        this._cursorState = GetNode<CursorState>("/root/CursorState");
+        this._roomState = GetNode<RoomState>("/root/RoomState");
+        this._osc = GetNode<OSCController>("/root/OSCController");
+
+        this._roomState.OnStateChange += (bool _) => this.UpdateOSC();
+        this._cursorState.OnStateChange += this.UpdateOSC;
+
+        this.UpdateOSC();
     }
 
-    public override void _Input(InputEvent @event)
+    private void UpdateOSC()
     {
-        if (this._state.IsBusy()) return;
+        if (this._cursorState.IsBusy()) return;
 
-        var pos = this._state.GetPosition();
+        var position = this._cursorState.GetPosition();
+        var input = this._roomState.GetInput(position);
 
-        if (Input.IsActionJustPressed("cursor_up"))
-            this._state.SetPosition(new Vector2(pos.X, pos.Y + 1));
+        var osc = new List<OSC>()
+        {
+            new DirectionalOSC()
+            {
+                Key = OSCKey.Axis,
+                OnActivate = (Vector2 delta) => this.OnMove(delta),
+                Name = "Move",
+            }
+        };
 
-        if (Input.IsActionJustPressed("cursor_down"))
-            this._state.SetPosition(new Vector2(pos.X, pos.Y - 1));
+        osc.AddRange(input);
 
-        if (Input.IsActionJustPressed("cursor_left"))
-            this._state.SetPosition(new Vector2(pos.X + 1, pos.Y));
+        this._osc.RegisterOSC(osc.ToArray());
+    }
 
-        if (Input.IsActionJustPressed("cursor_right"))
-            this._state.SetPosition(new Vector2(pos.X - 1, pos.Y));
-
-        if (Input.IsActionJustPressed("cursor_action_primary"))
-            this._state.CursorActionPressed(ActionType.Primary);
-
-        if (Input.IsActionJustPressed("cursor_action_secondary"))
-            this._state.CursorActionPressed(ActionType.Secondary);
+    private void OnMove(Vector2 delta)
+    {
+        var pos = this._cursorState.GetPosition();
+        this._cursorState.SetPosition(pos + delta);
     }
 }
