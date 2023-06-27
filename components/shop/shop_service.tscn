@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqq60ctr262uw"]
+
+[ext_resource type="Script" path="res://components/shop/scripts/ShopService.cs" id="1_0djna"]
+[ext_resource type="PackedScene" uid="uid://cbutd0w5e36p" path="res://components/shop/ui/shop_popup.tscn" id="2_nvsq7"]
+
+[node name="shop_service" type="Node"]
+script = ExtResource("1_0djna")
+_windowTemplate = ExtResource("2_nvsq7")

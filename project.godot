@@ -23,11 +23,12 @@ TilesDatabase="*res://core/databases/TilesDatabase.cs"
 ItemsDatabase="*res://core/databases/ItemsDatabase.cs"
 SaveManager="*res://core/save/SaveManager.cs"
 DialogueService="*res://components/dialogue/scripts/DialogueService.cs"
+ShopService="*res://components/shop/shop_service.tscn"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 OSCController="*res://core/on_screen_controls/on_screen_controls.tscn"
 RoomState="*res://components/room/scripts/RoomState.cs"
 CursorState="*res://components/cursor/scripts/CursorState.cs"
 CryState="*res://components/hub/scripts/cry/CryState.cs"
-ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 Console="*res://addons/panku_console/console.tscn"
 
 [display]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cbutd0w5e36p"]
 
-[ext_resource type="Script" path="res://components/storage/scripts/StoragePopup.cs" id="1_hattn"]
+[ext_resource type="Script" path="res://components/shop/scripts/ShopPopup.cs" id="1_4vbsh"]
 [ext_resource type="Texture2D" uid="uid://c21eh5xee2x0y" path="res://assets/sprites/Berry.png" id="2_ebhtj"]
 [ext_resource type="Texture2D" uid="uid://dr7thqpvpri8e" path="res://assets/sprites/BerryBag.png" id="3_7u7dq"]
 [ext_resource type="FontFile" uid="uid://b8kvh0dsg4gih" path="res://assets/fonts/Candara.ttf" id="4_7nrmd"]
@@ -10,7 +10,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao32c"]
 
-[node name="shop_popup" type="Panel" node_paths=PackedStringArray("List")]
+[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "Content", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -22,8 +22,13 @@ offset_right = 400.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hattn")
-List = NodePath("")
+script = ExtResource("1_4vbsh")
+Items = NodePath("Content/ScrollContainer/Items")
+Content = NodePath("Content/Panel/Content")
+ItemTitle = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Title")
+ItemPrice = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Price")
+ItemIcon = NodePath("Content/Panel/Content/CenterContainer/TextureRect")
+ItemDescription = NodePath("Content/Panel/Content/RichTextLabel")
 
 [node name="Titlebar" type="Panel" parent="."]
 layout_mode = 1
@@ -86,7 +91,15 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="HBoxContainer" parent="Content/Panel"]
+[node name="Content" type="Control" parent="Content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="HBoxContainer" parent="Content/Panel/Content"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -94,30 +107,30 @@ offset_right = 0.5
 offset_bottom = 100.0
 grow_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="Content/Panel/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="Content/Panel/Content/CenterContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_ebhtj")
 expand_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Panel/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Panel/Content/CenterContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Content/Panel/CenterContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Content/Panel/Content/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_7nrmd")
 theme_override_font_sizes/font_size = 24
 text = "Berry"
 vertical_alignment = 1
 
-[node name="Price" type="Label" parent="Content/Panel/CenterContainer/VBoxContainer"]
+[node name="Price" type="Label" parent="Content/Panel/Content/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_7nrmd")
 theme_override_font_sizes/font_size = 16
 text = "Price: 5 Coins"
 vertical_alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Content/Panel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Content/Panel/Content"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -131,5 +144,10 @@ theme_override_fonts/normal_font = ExtResource("5_2tiop")
 bbcode_enabled = true
 text = "Provided to you by [color=#9c98f9]Tera14[/color], the favorite of a certain [color=#c1c6df][b][u]Ghost boy[/u][/b][/color].
 
-Has a sweet flavor, feels refreshing to eat even raw"
+Has a sweet flavor, feels refreshing to eat even raw
+
+- [color=green]+10 Hunger[/color]
+- [color=green]+5 Stamina[/color]
+- [color=red]-5 Sleepiness[/color]
+"
 fit_content = true
