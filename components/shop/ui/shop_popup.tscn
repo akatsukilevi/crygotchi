@@ -10,7 +10,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao32c"]
 
-[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "Content", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription")]
+[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "ItemDetails", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4vbsh")
 Items = NodePath("Content/ScrollContainer/Items")
-Content = NodePath("Content/Panel/Content")
+ItemDetails = NodePath("Content/Panel/Content")
 ItemTitle = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Title")
 ItemPrice = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Price")
 ItemIcon = NodePath("Content/Panel/Content/CenterContainer/TextureRect")
@@ -136,7 +136,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -365.0
+offset_top = -360.0
 offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 0

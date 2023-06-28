@@ -9,4 +9,11 @@ public partial class ShopService : Node
     {
         base._Ready();
     }
+
+    public void OpenShop(IDatabaseItem[] items, Action OnClose)
+    {
+        var child = this._windowTemplate.Instantiate<ShopPopup>();
+        child.Ready += () => child.Setup(items, OnClose);
+        this.AddChild(child);
+    }
 }
