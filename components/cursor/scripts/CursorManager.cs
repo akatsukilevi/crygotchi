@@ -135,6 +135,15 @@ public partial class CursorManager : Node
         //* On building mode, is focusing a tile?
         if (currentHovering == null)
         {
+            if (currentSelected == null)
+            {
+                //* Not focusing anything, but nothing selected
+                this._targetColor = NormalColor;
+                this.IconRemove.Visible = false;
+                this.IconTile.Visible = false;
+                return;
+            }
+
             //* Nope, not focusing anything
             this._targetColor = PositiveColor;
             this.IconRemove.Visible = false;

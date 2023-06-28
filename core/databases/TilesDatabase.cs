@@ -4,8 +4,12 @@ using System.Collections.Generic;
 
 public partial class TilesDatabase : Node
 {
-    private Dictionary<string, RoomTile> _tiles;
     private Dictionary<string, RoomTileDecoration> _decorations;
+    private Dictionary<string, RoomTile> _tiles;
+
+    private SaveGame _save;
+    private List<string> _unlockedTiles = new();
+    private List<string> _unlockedDecorations = new();
 
     public TilesDatabase() : base()
     {
@@ -51,6 +55,31 @@ public partial class TilesDatabase : Node
         }
     }
 
+    public override void _Ready()
+    {
+        base._Ready();
+        this._save = this.GetNode<SaveManager>("/root/SaveManager").GetSave();
+        this._save.OnSaveUpdated += this.OnSaveUpdated;
+    }
+
+    private void OnSaveUpdated()
+    {
+        var save = this._save.GetRoomSaveState();
+        this._unlockedTiles = save.OwnedTiles;
+        this._unlockedDecorations = save.OwnedDecorations;
+    }
+
+    public List<RoomTile> GetShopTiles()
+    {
+        return this._tiles.Values.ToList();
+    }
+
+    public List<RoomTileDecoration> GetShopDecorations()
+    {
+        return this._decorations.Values.ToList();
+    }
+
+    #region "Tiles"
     public int ClampTileIndex(int number)
     {
         int amount = this._tiles.Count;
@@ -61,9 +90,9 @@ public partial class TilesDatabase : Node
         return number < 0 ? amount - 1 : number;
     }
 
-    public int ClampDecorationIndex(int number)
+    public int ClampUnlockedTileIndex(int number)
     {
-        int amount = this._decorations.Count;
+        int amount = this._unlockedTiles.Count;
 
         if (number >= amount)
             return 0;
@@ -79,11 +108,12 @@ public partial class TilesDatabase : Node
         return null;
     }
 
-    public RoomTileDecoration GetDecorationById(string id)
+    public RoomTile GetUnlockedTileById(string id)
     {
-        if (this._decorations.TryGetValue(id, out RoomTileDecoration decoration)) return decoration;
+        if (!this._unlockedTiles.Contains(id)) return null;
+        if (this._tiles.TryGetValue(id, out RoomTile tile)) return tile;
 
-        GD.PushWarning($"Cannot find decoration \"{id}\"");
+        GD.PushWarning($"Cannot find tile \"{id}\"");
         return null;
     }
 
@@ -92,8 +122,67 @@ public partial class TilesDatabase : Node
         return this._tiles.ElementAt(index).Value;
     }
 
+    public RoomTile GetUnlockedTileByIndex(int index)
+    {
+        if (this._unlockedTiles.Count < index) return null;
+        if (this._unlockedTiles.Count == 0) return null;
+
+        var id = this._unlockedTiles.ElementAt(index);
+        return this.GetUnlockedTileById(id);
+    }
+    #endregion
+
+    #region "Decorations"
+    public int ClampDecorationIndex(int number)
+    {
+        int amount = this._decorations.Count;
+
+        if (number >= amount)
+            return 0;
+
+        return number < 0 ? amount - 1 : number;
+    }
+
+
+    public int ClampUnlockedDecorationIndex(int number)
+    {
+        int amount = this._unlockedDecorations.Count;
+
+        if (number >= amount)
+            return 0;
+
+        return number < 0 ? amount - 1 : number;
+    }
+
+    public RoomTileDecoration GetUnlockedDecorationById(string id)
+    {
+        if (!this._unlockedDecorations.Contains(id)) return null;
+        if (this._decorations.TryGetValue(id, out RoomTileDecoration decoration)) return decoration;
+
+        GD.PushWarning($"Cannot find decoration \"{id}\"");
+        return null;
+    }
+
+    public RoomTileDecoration GetDecorationById(string id)
+    {
+        if (this._decorations.TryGetValue(id, out RoomTileDecoration decoration)) return decoration;
+
+        GD.PushWarning($"Cannot find decoration \"{id}\"");
+        return null;
+    }
+
     public RoomTileDecoration GetDecorationByIndex(int index)
     {
         return this._decorations.ElementAt(index).Value;
     }
+
+    public RoomTileDecoration GetUnlockedDecorationByIndex(int index)
+    {
+        if (this._unlockedDecorations.Count < index) return null;
+        if (this._unlockedDecorations.Count == 0) return null;
+
+        var id = this._unlockedDecorations.ElementAt(index);
+        return this.GetUnlockedDecorationById(id);
+    }
+    #endregion
 }

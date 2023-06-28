@@ -26,8 +26,8 @@ public partial class RoomState : Node
         this._tilesDatabase = this.GetNode<TilesDatabase>("/root/TilesDatabase");
         this._save = this.GetNode<SaveManager>("/root/SaveManager").GetSave();
 
-        this._selectedBuilding = this._tilesDatabase.GetTileByIndex(0);
-        this._selectedDecorating = this._tilesDatabase.GetDecorationByIndex(0);
+        this._selectedBuilding = this._tilesDatabase.GetUnlockedTileByIndex(0);
+        this._selectedDecorating = this._tilesDatabase.GetUnlockedDecorationByIndex(0);
 
         this._save.OnSaveUpdated += this.OnSaveUpdated;
     }
@@ -130,12 +130,6 @@ public partial class RoomState : Node
             },
             new OSC()
             {
-                OnActivate = () => this.OnInteract?.Invoke(),
-                Name = currentHovering == null ? "Build Tile" : "Remove Tile",
-                Key = OSCKey.Primary,
-            },
-            new OSC()
-            {
                 OnActivate = this.NextSelectedBuilding,
                 Name = "Next Tile",
                 Key = OSCKey.ShiftRight,
@@ -147,6 +141,25 @@ public partial class RoomState : Node
                 Key = OSCKey.ShiftLeft,
             }
         };
+
+        if (currentHovering != null)
+        {
+            input.Add(new OSC()
+            {
+                OnActivate = () => this.OnInteract?.Invoke(),
+                Name = "Remove Tile",
+                Key = OSCKey.Primary,
+            });
+        }
+        else if (this._selectedBuilding != null)
+        {
+            input.Add(new OSC()
+            {
+                OnActivate = () => this.OnInteract?.Invoke(),
+                Name = "Build Tile",
+                Key = OSCKey.Primary,
+            });
+        }
 
         return input.ToArray();
     }
@@ -192,16 +205,16 @@ public partial class RoomState : Node
 
     public void NextSelectedBuilding()
     {
-        this._selectedBuildingIndex = this._tilesDatabase.ClampTileIndex(this._selectedBuildingIndex + 1);
-        this._selectedBuilding = this._tilesDatabase.GetTileByIndex(this._selectedBuildingIndex);
+        this._selectedBuildingIndex = this._tilesDatabase.ClampUnlockedTileIndex(this._selectedBuildingIndex + 1);
+        this._selectedBuilding = this._tilesDatabase.GetUnlockedTileByIndex(this._selectedBuildingIndex);
 
         this.OnStateChange?.Invoke(false);
     }
 
     public void PreviousSelectedBuilding()
     {
-        this._selectedBuildingIndex = this._tilesDatabase.ClampTileIndex(this._selectedBuildingIndex - 1);
-        this._selectedBuilding = this._tilesDatabase.GetTileByIndex(this._selectedBuildingIndex);
+        this._selectedBuildingIndex = this._tilesDatabase.ClampUnlockedTileIndex(this._selectedBuildingIndex - 1);
+        this._selectedBuilding = this._tilesDatabase.GetUnlockedTileByIndex(this._selectedBuildingIndex);
 
         this.OnStateChange?.Invoke(false);
     }
@@ -235,12 +248,24 @@ public partial class RoomState : Node
 
         if (currentHovering == null) return input.ToArray();
 
-        input.Add(new OSC()
+        if (currentHovering.Decoration != null)
         {
-            OnActivate = () => this.OnInteract?.Invoke(),
-            Name = currentHovering.Decoration != null ? "Remove Decoration" : "Place Decoration",
-            Key = OSCKey.Primary,
-        });
+            input.Add(new OSC()
+            {
+                OnActivate = () => this.OnInteract?.Invoke(),
+                Name = "Remove Decoration",
+                Key = OSCKey.Primary,
+            });
+        }
+        else if (this._selectedDecorating != null)
+        {
+            input.Add(new OSC()
+            {
+                OnActivate = () => this.OnInteract?.Invoke(),
+                Name = "Place Decoration",
+                Key = OSCKey.Primary,
+            });
+        }
 
         return input.ToArray();
     }
@@ -258,16 +283,16 @@ public partial class RoomState : Node
 
     public void NextSelectedDecorating()
     {
-        this._selectedDecoratingIndex = this._tilesDatabase.ClampDecorationIndex(this._selectedDecoratingIndex + 1);
-        this._selectedDecorating = this._tilesDatabase.GetDecorationByIndex(this._selectedDecoratingIndex);
+        this._selectedDecoratingIndex = this._tilesDatabase.ClampUnlockedDecorationIndex(this._selectedDecoratingIndex + 1);
+        this._selectedDecorating = this._tilesDatabase.GetUnlockedDecorationByIndex(this._selectedDecoratingIndex);
 
         this.OnStateChange?.Invoke(false);
     }
 
     public void PreviousSelectedDecorating()
     {
-        this._selectedDecoratingIndex = this._tilesDatabase.ClampDecorationIndex(this._selectedDecoratingIndex - 1);
-        this._selectedDecorating = this._tilesDatabase.GetDecorationByIndex(this._selectedDecoratingIndex);
+        this._selectedDecoratingIndex = this._tilesDatabase.ClampUnlockedDecorationIndex(this._selectedDecoratingIndex - 1);
+        this._selectedDecorating = this._tilesDatabase.GetUnlockedDecorationByIndex(this._selectedDecoratingIndex);
 
         this.OnStateChange?.Invoke(false);
     }

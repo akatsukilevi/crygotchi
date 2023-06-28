@@ -69,6 +69,8 @@ public partial class StoragePopup : Node
 
     public override void _Process(double delta)
     {
+        if (!this._hasSetup) return;
+
         this.List.GrabFocus();
         this.List.GrabClickFocus();
     }
