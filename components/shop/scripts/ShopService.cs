@@ -10,10 +10,12 @@ public partial class ShopService : Node
         base._Ready();
     }
 
-    public void OpenShop(IDatabaseItem[] items, Action OnClose)
+    public ShopPopup OpenShop(IDatabaseItem[] items, IDatabaseItem[] owned, Action<IDatabaseItem> OnSelect, Action OnClose)
     {
-        var child = this._windowTemplate.Instantiate<ShopPopup>();
-        child.Ready += () => child.Setup(items, OnClose);
-        this.AddChild(child);
+        var shop = this._windowTemplate.Instantiate<ShopPopup>();
+        shop.Ready += () => shop.Setup(items, owned, OnSelect, OnClose);
+        this.AddChild(shop);
+
+        return shop;
     }
 }

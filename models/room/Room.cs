@@ -41,6 +41,11 @@ public class Room
         this.OwnedTiles = serializedOwnedTiles.ToList();
         this.OwnedDecorations = serializedOwnedDecorations.ToList();
     }
+
+    public void UnlockTile(RoomTile tile)
+    {
+        this.OwnedTiles.Add(tile.GetId());
+    }
 }
 
 public enum RoomMode

@@ -14,6 +14,7 @@ public partial class SaveManager : Node
     {
         base._Ready();
         this._save.Initialize(this);
+        this.LoadSavegame();
     }
 
     public override void _Process(double delta)
@@ -21,8 +22,8 @@ public partial class SaveManager : Node
         base._Process(delta);
 
         //* If press F11, load
-        // if (Input.IsActionJustPressed("debug_load")) this.LoadSavegame();
-        // if (Input.IsActionJustPressed("debug_save")) this.WriteSavegame();
+        if (Input.IsActionJustPressed("debug_load")) this.LoadSavegame();
+        if (Input.IsActionJustPressed("debug_save")) this.WriteSavegame();
     }
 
     public SaveGame GetSave()

@@ -1,16 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbutd0w5e36p"]
+[gd_scene load_steps=7 format=3 uid="uid://cbutd0w5e36p"]
 
 [ext_resource type="Script" path="res://components/shop/scripts/ShopPopup.cs" id="1_4vbsh"]
 [ext_resource type="Texture2D" uid="uid://c21eh5xee2x0y" path="res://assets/sprites/Berry.png" id="2_ebhtj"]
 [ext_resource type="Texture2D" uid="uid://dr7thqpvpri8e" path="res://assets/sprites/BerryBag.png" id="3_7u7dq"]
-[ext_resource type="FontFile" uid="uid://b8kvh0dsg4gih" path="res://assets/fonts/Candara.ttf" id="4_7nrmd"]
 [ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="5_2tiop"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mqyum"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao32c"]
 
-[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "ItemDetails", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription")]
+[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "ItemDetails", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription", "PlayerCoins")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,10 +24,11 @@ grow_vertical = 2
 script = ExtResource("1_4vbsh")
 Items = NodePath("Content/ScrollContainer/Items")
 ItemDetails = NodePath("Content/Panel/Content")
-ItemTitle = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Title")
-ItemPrice = NodePath("Content/Panel/Content/CenterContainer/VBoxContainer/Price")
-ItemIcon = NodePath("Content/Panel/Content/CenterContainer/TextureRect")
+ItemTitle = NodePath("Content/Panel/Content/Metadata/Content/Title")
+ItemPrice = NodePath("Content/Panel/Content/Metadata/Content/Price")
+ItemIcon = NodePath("Content/Panel/Content/Metadata/Icon")
 ItemDescription = NodePath("Content/Panel/Content/RichTextLabel")
+PlayerCoins = NodePath("Content/Panel/Content/Metadata/User Data/Coins")
 
 [node name="Titlebar" type="Panel" parent="."]
 layout_mode = 1
@@ -67,6 +67,8 @@ vertical_scroll_mode = 2
 [node name="Items" type="ItemList" parent="Content/ScrollContainer"]
 custom_minimum_size = Vector2(200, 475)
 layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_mqyum")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ao32c")
 auto_height = true
@@ -99,7 +101,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="HBoxContainer" parent="Content/Panel/Content"]
+[node name="Metadata" type="HBoxContainer" parent="Content/Panel/Content"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -107,28 +109,49 @@ offset_right = 0.5
 offset_bottom = 100.0
 grow_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="Content/Panel/Content/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="Content/Panel/Content/Metadata"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_ebhtj")
 expand_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Panel/Content/CenterContainer"]
+[node name="Content" type="Control" parent="Content/Panel/Content/Metadata"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="Content/Panel/Content/CenterContainer/VBoxContainer"]
+[node name="Title" type="RichTextLabel" parent="Content/Panel/Content/Metadata/Content"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_7nrmd")
-theme_override_font_sizes/font_size = 24
+offset_right = 300.0
+offset_bottom = 23.0
+bbcode_enabled = true
 text = "Berry"
-vertical_alignment = 1
+fit_content = true
 
-[node name="Price" type="Label" parent="Content/Panel/Content/CenterContainer/VBoxContainer"]
+[node name="Price" type="RichTextLabel" parent="Content/Panel/Content/Metadata/Content"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_7nrmd")
-theme_override_font_sizes/font_size = 16
+offset_top = 27.0
+offset_right = 300.0
+offset_bottom = 50.0
+bbcode_enabled = true
 text = "Price: 5 Coins"
-vertical_alignment = 1
+fit_content = true
+
+[node name="User Data" type="Control" parent="Content/Panel/Content/Metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Coins" type="RichTextLabel" parent="Content/Panel/Content/Metadata/User Data"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Coins: 5 Coins"
+fit_content = true
+scroll_active = false
+text_direction = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Content/Panel/Content"]
 layout_mode = 1

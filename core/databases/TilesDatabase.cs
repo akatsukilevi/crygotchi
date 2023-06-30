@@ -74,9 +74,31 @@ public partial class TilesDatabase : Node
         return this._tiles.Values.ToList();
     }
 
+    public List<RoomTile> GetShopOwnedTiles()
+    {
+        var tiles = new List<RoomTile>();
+        foreach (var tile in this._unlockedTiles)
+        {
+            tiles.Add(this.GetTileById(tile));
+        }
+
+        return tiles;
+    }
+
     public List<RoomTileDecoration> GetShopDecorations()
     {
         return this._decorations.Values.ToList();
+    }
+
+    public List<RoomTileDecoration> GetShopOwnedDecorations()
+    {
+        var decorations = new List<RoomTileDecoration>();
+        foreach (var decoration in this._unlockedDecorations)
+        {
+            decorations.Add(this.GetDecorationById(decoration));
+        }
+
+        return decorations;
     }
 
     #region "Tiles"
