@@ -43,6 +43,7 @@ public abstract partial class NPC : Node3D
 
         GD.Print("[ NPC ] Detected player near!");
         this._isInteractable = true;
+        this.UpdateInput();
     }
 
     private void OnAreaCullExited(Area3D collider)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dj0n1wfnntcgq"]
+[gd_scene load_steps=11 format=3 uid="uid://dj0n1wfnntcgq"]
 
 [ext_resource type="PackedScene" uid="uid://bpfxnttam50q1" path="res://components/hub/mesh/HubMesh.tscn" id="1_cjump"]
 [ext_resource type="Script" path="res://components/hub/scripts/cry/CryCamera.cs" id="2_nc5h4"]
 [ext_resource type="PackedScene" uid="uid://cku3kwh7mgtay" path="res://assets/cry/CryCharacter.tscn" id="3_5u1if"]
 [ext_resource type="Script" path="res://components/hub/scripts/cry/CryController.cs" id="4_esp3h"]
-[ext_resource type="PackedScene" uid="uid://fixmahy767ad" path="res://components/hub/npcs/test_npc.tscn" id="5_q6qio"]
+[ext_resource type="PackedScene" uid="uid://c6hsfusp2nx6a" path="res://components/hub/npcs/bob_npc.tscn" id="5_1t2s3"]
+[ext_resource type="PackedScene" uid="uid://fixmahy767ad" path="res://components/hub/npcs/alice_npc.tscn" id="5_q6qio"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a3lci"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -71,5 +72,8 @@ Camera = NodePath("../Camera3D")
 
 [node name="NPCs" type="Node3D" parent="."]
 
-[node name="john_doe" parent="NPCs" instance=ExtResource("5_q6qio")]
+[node name="bob_doe" parent="NPCs" instance=ExtResource("5_1t2s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77404, 1.92323, -23.7772)
+
+[node name="alice_doe" parent="NPCs" instance=ExtResource("5_q6qio")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, -19)

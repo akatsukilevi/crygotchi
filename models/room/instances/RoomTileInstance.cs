@@ -1,7 +1,5 @@
 using Godot.Collections;
 
-using Microsoft.Win32;
-
 namespace Crygotchi;
 
 public partial class RoomTileInstance : Resource

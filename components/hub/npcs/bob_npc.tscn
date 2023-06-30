@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://fixmahy767ad"]
+[gd_scene load_steps=5 format=3 uid="uid://c6hsfusp2nx6a"]
 
-[ext_resource type="Script" path="res://components/hub/scripts/npc/JohnDoe.cs" id="1_r3gvm"]
+[ext_resource type="Script" path="res://components/hub/scripts/npc/BobDoe.cs" id="1_4w7wd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g5tyy"]
 radial_segments = 16
@@ -11,8 +11,8 @@ rings = 4
 [sub_resource type="SphereShape3D" id="SphereShape3D_imgk0"]
 radius = 3.0
 
-[node name="john_doe" type="StaticBody3D" groups=["Hub_NPC"]]
-script = ExtResource("1_r3gvm")
+[node name="bob_doe" type="StaticBody3D" groups=["Hub_NPC"]]
+script = ExtResource("1_4w7wd")
 
 [node name="Mesh" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

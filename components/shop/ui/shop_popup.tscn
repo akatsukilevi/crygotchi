@@ -1,0 +1,176 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbutd0w5e36p"]
+
+[ext_resource type="Script" path="res://components/shop/scripts/ShopPopup.cs" id="1_4vbsh"]
+[ext_resource type="Texture2D" uid="uid://c21eh5xee2x0y" path="res://assets/sprites/Berry.png" id="2_ebhtj"]
+[ext_resource type="Texture2D" uid="uid://dr7thqpvpri8e" path="res://assets/sprites/BerryBag.png" id="3_7u7dq"]
+[ext_resource type="FontFile" uid="uid://dxhwloixsjucy" path="res://assets/fonts/Candarab.ttf" id="5_2tiop"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mqyum"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao32c"]
+
+[node name="shop_popup" type="Panel" node_paths=PackedStringArray("Items", "ItemDetails", "ItemTitle", "ItemPrice", "ItemIcon", "ItemDescription", "PlayerCoins")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4vbsh")
+Items = NodePath("Content/ScrollContainer/Items")
+ItemDetails = NodePath("Content/Panel/Content")
+ItemTitle = NodePath("Content/Panel/Content/Metadata/Content/Title")
+ItemPrice = NodePath("Content/Panel/Content/Metadata/Content/Price")
+ItemIcon = NodePath("Content/Panel/Content/Metadata/Icon")
+ItemDescription = NodePath("Content/Panel/Content/RichTextLabel")
+PlayerCoins = NodePath("Content/Panel/Content/Metadata/User Data/Coins")
+
+[node name="Titlebar" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 25.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Titlebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Content"]
+layout_mode = 2
+offset_right = 208.0
+offset_bottom = 475.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Items" type="ItemList" parent="Content/ScrollContainer"]
+custom_minimum_size = Vector2(200, 475)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mqyum")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ao32c")
+auto_height = true
+item_count = 2
+same_column_width = true
+fixed_column_width = 200
+fixed_icon_size = Vector2i(32, 32)
+item_0/text = "Berry"
+item_0/icon = ExtResource("2_ebhtj")
+item_1/text = "Seeds"
+item_1/icon = ExtResource("3_7u7dq")
+
+[node name="Panel" type="Panel" parent="Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 212.5
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="Control" parent="Content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Metadata" type="HBoxContainer" parent="Content/Panel/Content"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 0.5
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="Icon" type="TextureRect" parent="Content/Panel/Content/Metadata"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_ebhtj")
+expand_mode = 2
+
+[node name="Content" type="Control" parent="Content/Panel/Content/Metadata"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="RichTextLabel" parent="Content/Panel/Content/Metadata/Content"]
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "Berry"
+fit_content = true
+
+[node name="Price" type="RichTextLabel" parent="Content/Panel/Content/Metadata/Content"]
+layout_mode = 2
+offset_top = 27.0
+offset_right = 300.0
+offset_bottom = 50.0
+bbcode_enabled = true
+text = "Price: 5 Coins"
+fit_content = true
+
+[node name="User Data" type="Control" parent="Content/Panel/Content/Metadata"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Coins" type="RichTextLabel" parent="Content/Panel/Content/Metadata/User Data"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Coins: 5 Coins"
+fit_content = true
+scroll_active = false
+text_direction = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Content/Panel/Content"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_2tiop")
+bbcode_enabled = true
+text = "Provided to you by [color=#9c98f9]Tera14[/color], the favorite of a certain [color=#c1c6df][b][u]Ghost boy[/u][/b][/color].
+
+Has a sweet flavor, feels refreshing to eat even raw
+
+- [color=green]+10 Hunger[/color]
+- [color=green]+5 Stamina[/color]
+- [color=red]-5 Sleepiness[/color]
+"
+fit_content = true

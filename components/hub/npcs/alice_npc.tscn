@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://fixmahy767ad"]
+
+[ext_resource type="Script" path="res://components/hub/scripts/npc/AliceDoe.cs" id="1_2kush"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g5tyy"]
+radial_segments = 16
+rings = 4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uqklq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_imgk0"]
+radius = 3.0
+
+[node name="alice_doe" type="StaticBody3D" groups=["Hub_NPC"]]
+script = ExtResource("1_2kush")
+
+[node name="Mesh" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_g5tyy")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_uqklq")
+
+[node name="TriggerZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerZone"]
+shape = SubResource("SphereShape3D_imgk0")

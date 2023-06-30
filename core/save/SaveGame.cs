@@ -64,4 +64,21 @@ public partial class SaveGame : Resource
 
         this.OnSaveUpdated?.Invoke();
     }
+
+    public int GetCoins()
+    {
+        return this._coins;
+    }
+
+    public bool CanAfford(int cost)
+    {
+        return this._coins >= Math.Max(cost, 0);
+    }
+
+    public void SpendCoins(int amount)
+    {
+        if (!this.CanAfford(amount)) return; //* Cannot afford it
+        this._coins = Math.Max(this._coins - Math.Max(amount, 0), 0); //* Spend the coins but clamp to 0
+        this.OnSaveUpdated?.Invoke();
+    }
 }
