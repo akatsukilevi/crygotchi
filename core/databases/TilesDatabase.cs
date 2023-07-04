@@ -37,6 +37,7 @@ public partial class TilesDatabase : Node
 
             GD.Print($"Loading in tile \"{id}\" ({path})");
             this._tiles.Add(id, item.Setup(id));
+            this._unlockedTiles.Add(id);
         }
 
         foreach (var item in loadedDecorations)
@@ -52,6 +53,7 @@ public partial class TilesDatabase : Node
 
             GD.Print($"Loading in decoration \"{id}\" ({path})");
             this._decorations.Add(id, item.Setup(id));
+            this._unlockedDecorations.Add(id);
         }
     }
 

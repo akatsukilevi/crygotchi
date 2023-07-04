@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnyv4f1mde1iy"]
+[gd_scene load_steps=3 format=3 uid="uid://cnyv4f1mde1iy"]
 
 [ext_resource type="Script" path="res://components/room/scripts/Tiles/RoomTileObject.cs" id="1_4jry8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jp3t6"]
+size = Vector3(2, 1, 1)
 
 [node name="Room Tile" type="Node3D" node_paths=PackedStringArray("Mesh", "DecorationParent")]
 script = ExtResource("1_4jry8")
 Mesh = NodePath("Mesh")
 DecorationParent = NodePath("DecorationParent")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_jp3t6")
 
 [node name="Mesh" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -50,9 +50,16 @@ public partial class RoomState : Node
         this.OnStateChange?.Invoke(false);
     }
 
-    public RoomTileInstance GetTileAt(Vector2 position) =>
-        !this._tiles.ContainsKey(position) ?
-            null : this._tiles[position];
+    public RoomTileInstance GetTileAt(Vector2 position)
+    {
+        return this._tiles.ContainsKey(position) ? this._tiles[position] : null;
+    }
+
+    public KeyValuePair<Vector2, RoomTileInstance>? GetRandomTile()
+    {
+        if (this._tiles.Count == 0) return null;
+        return this._tiles.ElementAt(Random.Shared.Next(0, this._tiles.Count - 1));
+    }
 
     public OSC[] GetInput(Vector2 cursorPosition)
     {
