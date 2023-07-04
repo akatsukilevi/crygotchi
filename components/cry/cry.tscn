@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnm80t0sulss1"]
+
+[ext_resource type="Script" path="res://components/cry/scripts/CryRoomController.cs" id="1_bydh1"]
+[ext_resource type="PackedScene" uid="uid://b4ey53yudpa62" path="res://assets/cry/Cry.glb" id="2_1m6ma"]
+
+[node name="cry" type="Node3D"]
+script = ExtResource("1_bydh1")
+CryMesh = ExtResource("2_1m6ma")
+MoveTime = 30.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwpepdhcssptr"]
+[gd_scene load_steps=7 format=3 uid="uid://cwpepdhcssptr"]
 
 [ext_resource type="PackedScene" uid="uid://jevpdgxbemyj" path="res://components/cursor/cursor.tscn" id="1_wbiw1"]
 [ext_resource type="PackedScene" uid="uid://kywqnwtrcbla" path="res://components/room/room.tscn" id="2_4hjd7"]
+[ext_resource type="PackedScene" uid="uid://cnm80t0sulss1" path="res://components/cry/cry.tscn" id="3_30cmc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2boy"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,3 +40,5 @@ size = 40.0
 
 [node name="Room" parent="." node_paths=PackedStringArray("Cursor") instance=ExtResource("2_4hjd7")]
 Cursor = NodePath("../Cursor")
+
+[node name="cry" parent="." instance=ExtResource("3_30cmc")]
