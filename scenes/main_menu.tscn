@@ -1,0 +1,265 @@
+[gd_scene load_steps=14 format=3 uid="uid://ddd4gorrs4lj3"]
+
+[ext_resource type="Texture2D" uid="uid://dkff42q21j1w2" path="res://assets/Logo.png" id="1_5ijmf"]
+[ext_resource type="FontFile" uid="uid://b8kvh0dsg4gih" path="res://assets/fonts/Candara.ttf" id="2_x6vu0"]
+
+[sub_resource type="Animation" id="Animation_hefwb"]
+resource_name = "show_in"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("screen_fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1.5, 1.5),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("top_content/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3, 4),
+"transitions": PackedFloat32Array(1.5, 1.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bottom_content/Key_Panel/Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4.5, 5.5),
+"transitions": PackedFloat32Array(1.5, 1.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("top_bar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.1, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("bottom_bar_anchor/bottom_bar:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.1, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("top_bar:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.1, 2.9),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(64, -256), Vector2(64, -64)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("bottom_bar_anchor/bottom_bar:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.1, 2.9),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(-64, 0), Vector2(-64, -128)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("bottom_content/Key_Panel:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(4.1, 5),
+"transitions": PackedFloat32Array(1.5, 1.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u2xer"]
+_data = {
+"show_in": SubResource("Animation_hefwb")
+}
+
+[sub_resource type="Gradient" id="Gradient_mv22q"]
+offsets = PackedFloat32Array(0.1, 0.25, 0.35, 0.75, 0.85, 0.95)
+colors = PackedColorArray(0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0.392157, 0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0.392157, 0.490196, 0.47451, 0.756863, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ebq4a"]
+gradient = SubResource("Gradient_mv22q")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_43ebr"]
+texture = SubResource("GradientTexture2D_ebq4a")
+
+[sub_resource type="Gradient" id="Gradient_8inko"]
+offsets = PackedFloat32Array(0, 0.4)
+colors = PackedColorArray(0.215686, 0.192157, 0.466667, 1, 0.215686, 0.192157, 0.466667, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7sbd7"]
+gradient = SubResource("Gradient_8inko")
+width = 128
+height = 128
+fill_from = Vector2(1, 0.00537634)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2drk"]
+texture = SubResource("GradientTexture2D_7sbd7")
+
+[sub_resource type="Gradient" id="Gradient_jnmhr"]
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(0.215686, 0.192157, 0.466667, 1, 0.215686, 0.192157, 0.466667, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b2nhx"]
+gradient = SubResource("Gradient_jnmhr")
+width = 128
+height = 128
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0j50"]
+texture = SubResource("GradientTexture2D_b2nhx")
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+autoplay = "show_in"
+libraries = {
+"": SubResource("AnimationLibrary_u2xer")
+}
+
+[node name="top_content" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -405.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="top_content"]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 2
+texture = ExtResource("1_5ijmf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="bottom_content" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Key_Panel" type="Panel" parent="bottom_content"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_43ebr")
+
+[node name="Label" type="Label" parent="bottom_content/Key_Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -17.0
+offset_right = 163.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 0.756863, 0.423529, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_x6vu0")
+theme_override_font_sizes/font_size = 29
+text = "Press any key to continue"
+horizontal_alignment = 1
+
+[node name="top_bar" type="Panel" parent="."]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+rotation = 0.0436332
+theme_override_styles/panel = SubResource("StyleBoxTexture_o2drk")
+
+[node name="bottom_bar_anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="bottom_bar" type="Panel" parent="bottom_bar_anchor"]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -128.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.00872665
+theme_override_styles/panel = SubResource("StyleBoxTexture_x0j50")
+
+[node name="screen_fade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

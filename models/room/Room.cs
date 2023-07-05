@@ -26,9 +26,9 @@ public class Room
         this.Tiles.Clear();
 
         var serializedTiles = (Dictionary<string, Dictionary<string, Variant>>)data["Tiles"];
+        GD.Print($"[ ROOM ] Loading {serializedTiles.Count} tiles");
         foreach (var (key, tileData) in serializedTiles)
         {
-            GD.Print($"[ ROOM ] Loading tile {key}");
             var keyLocal = key.Split(",");
             var pos = new Vector2(float.Parse(keyLocal[0]), float.Parse(keyLocal[1]));
 
