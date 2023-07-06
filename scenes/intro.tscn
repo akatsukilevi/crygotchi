@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://xgolhn4i8ylp"]
+
+[ext_resource type="Script" path="res://components/intro/IntroScene.cs" id="1_dvkm6"]
+[ext_resource type="Texture2D" uid="uid://cjn5km4durdhg" path="res://assets/logos/covenfox.png" id="2_pt836"]
+
+[sub_resource type="Animation" id="Animation_3g6qt"]
+resource_name = "startup"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("notice_label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("logos:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gmf0"]
+_data = {
+"startup": SubResource("Animation_3g6qt")
+}
+
+[node name="intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dvkm6")
+
+[node name="animator" type="AnimationPlayer" parent="."]
+autoplay = "startup"
+libraries = {
+"": SubResource("AnimationLibrary_7gmf0")
+}
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="notice_label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Warning: Please read before playing
+
+A very small percentage of individuals may experience epileptic seizures when exposed to certain visual images, including certain light patterns or flashing lights in video games. if you, or anyone in your family, have any history of prior seizures or epilepsy, consult your doctor before playing. If you experience any of the following symptoms while playing a video game: eye soreness, altered vision, migrained, muscle twitching, convulsions, blackouts, loss of awareness or disorientation, IMMEDIATELY stop playing and consult your doctor before resuming play.
+
+Thank you for joining the preview alpha of our game! Please keep in mind that this version is a work in progress and may not represent the final quality of the game. We appreciate your understanding and support as we continue to develop and refine the experience.
+We're committed to evolving the game and making it better with each update. To access future updates and contribute to the game's development, check out our GitHub repository. Join our passionate community of players and developers as we shape the game together!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="logos" type="HBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -250.0
+offset_right = -25.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="covenfox_logo" type="TextureRect" parent="logos"]
+layout_mode = 2
+texture = ExtResource("2_pt836")
+expand_mode = 2
+stretch_mode = 5

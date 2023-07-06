@@ -12,8 +12,12 @@ config_version=5
 
 config/name="Crygotchi"
 config/description=" A casual room building, decoration and virtual pet game"
-run/main_scene="res://scenes/main_scene.tscn"
+run/main_scene="res://scenes/intro.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,6 +33,7 @@ OSCController="*res://core/on_screen_controls/on_screen_controls.tscn"
 RoomState="*res://components/room/scripts/RoomState.cs"
 CursorState="*res://components/cursor/scripts/CursorState.cs"
 CryState="*res://components/hub/scripts/cry/CryState.cs"
+Console="*res://addons/panku_console/console.tscn"
 
 [display]
 
@@ -124,6 +129,15 @@ debug_save={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194343,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+toggle_console={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[panku]
+
+toggle_console_action="toggle_console"
 
 [rendering]
 
