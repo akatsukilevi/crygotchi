@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bawkudw2xo5mr"]
+
+[ext_resource type="Texture2D" uid="uid://b2rr1khorg2wy" path="res://assets/cry/Cry_Eyeline.png" id="1_8kct1"]
+
+[resource]
+resource_name = "N00_000_00_FaceEyeline_00_FACE (Instance)"
+transparency = 4
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_8kct1")

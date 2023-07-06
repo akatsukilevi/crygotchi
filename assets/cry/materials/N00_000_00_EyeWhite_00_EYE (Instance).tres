@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bkku5l0a03t7v"]
+
+[ext_resource type="Texture2D" uid="uid://3wgsukgcgaq0" path="res://assets/cry/Cry_Eye Sclera.png" id="1_nuidj"]
+
+[resource]
+resource_name = "N00_000_00_EyeWhite_00_EYE (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_nuidj")

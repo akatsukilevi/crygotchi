@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://8tpeo4lt7gbg"]
+
+[ext_resource type="Texture2D" uid="uid://dp4yulowtomxs" path="res://assets/characters/pcs/hikari/textures/_21.png" id="1_vkt5q"]
+[ext_resource type="Texture2D" uid="uid://t0cnks64tvhu" path="res://assets/characters/pcs/hikari/textures/N00_000_00_HairBack_00_nml.png" id="2_nbqku"]
+
+[resource]
+resource_name = "N00_000_00_HairBack_00_HAIR (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_vkt5q")
+normal_enabled = true
+normal_texture = ExtResource("2_nbqku")

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://snr10dy5ak2y"]
+
+[ext_resource type="Texture2D" uid="uid://boj308uudwjnh" path="res://assets/cry/Cry_Mouth.png" id="1_mvpnh"]
+
+[resource]
+resource_name = "N00_000_00_FaceMouth_00_FACE (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_mvpnh")

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://7kbaepg1ffj1"]
+
+[ext_resource type="Texture2D" uid="uid://chyby6pmgo6lu" path="res://assets/characters/pcs/hikari/textures/_20.png" id="1_t73g2"]
+
+[resource]
+resource_name = "N00_007_01_Accessory_Tie_01_CLOTH_02 (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_t73g2")
