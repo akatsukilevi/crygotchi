@@ -13,13 +13,13 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_2pyrf")
-AAHelper = NodePath("Cry")
+AAHelper = NodePath("Hikari")
 
 [node name="Cry" parent="." instance=ExtResource("1_i8bgi")]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726234, 0)
 shape = SubResource("CapsuleShape3D_qu7eu")
 
 [node name="Hikari" parent="." instance=ExtResource("3_g6u05")]
-visible = false
