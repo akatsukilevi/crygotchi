@@ -2,16 +2,17 @@ using System.Collections.Generic;
 
 namespace Crygotchi;
 
-public partial class CryRoomController : Node3D
+public partial class CryRoomController : RigidBody3D
 {
     [ExportCategory("Settings")]
     [ExportGroup("References")]
-    [Export] public PackedScene CryMesh;
+    [Export] public AnimationTree CryAnimationTree;
     [ExportGroup("Timers")]
     [Export] public float MoveTime = 10f;
 
     private RoomState _room;
-    private CharacterBody3D _cry;
+
+    private CryAvatarRoomStateMachine _crStateMachine;
 
     private Vector2 _currentTile = Vector2.Zero;
     private Vector2 _previousTile = Vector2.Zero;
@@ -23,38 +24,37 @@ public partial class CryRoomController : Node3D
     public override void _Ready()
     {
         base._Ready();
-
+        _crStateMachine = new CryAvatarRoomStateMachine();
         this._room = this.GetNode<RoomState>("/root/RoomState");
-        this._cry = this.CryMesh.Instantiate<CharacterBody3D>();
 
         this._room.OnStateChange += this.OnRoomUpdate;
-
         this.UpdatePosition();
-        this.AddChild(this._cry);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+        //Switch to state machine
+
 
         if (!this._isExploringMode || !this._isCryVisible)
         {
             //* Hide cry then exit
-            this._cry.Visible = false;
-            this._currentTime = 0f;
+            Visible = false;
+            _currentTime = 0f;
             return;
         }
 
         //* Make cry visible and move to the right position
-        this._cry.Visible = true;
-        this._cry.GlobalPosition = new Vector3(this._currentTile.X * 2, 1f, this._currentTile.Y * 2);
+        Visible = true;
+        GlobalPosition = new Vector3(this._currentTile.X * 2, 1f, this._currentTile.Y * 2);
 
         //* Update the timer
-        this._currentTime += 0.1f;
-        if (this._currentTime >= this.MoveTime)
+        _currentTime += 0.1f;
+        if (_currentTime >= this.MoveTime)
         {
-            this._currentTime = 0f;
-            this.UpdatePosition();
+            _currentTime = 0f;
+            UpdatePosition();
         }
     }
 

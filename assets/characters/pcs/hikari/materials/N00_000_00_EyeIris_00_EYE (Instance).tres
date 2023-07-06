@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://8tovyc2wxsb"]
+
+[ext_resource type="Texture2D" uid="uid://d22mrltjru6jy" path="res://assets/characters/pcs/hikari/textures/_02.png" id="1_n5l13"]
+
+[resource]
+resource_name = "N00_000_00_EyeIris_00_EYE (Instance)"
+transparency = 4
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_n5l13")

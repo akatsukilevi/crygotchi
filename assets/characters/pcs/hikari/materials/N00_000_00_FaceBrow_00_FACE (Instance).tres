@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b3hgtmvgk4cxg"]
+
+[ext_resource type="Texture2D" uid="uid://bv26bh1vtkv3w" path="res://assets/characters/pcs/hikari/textures/_07.png" id="1_2dbuw"]
+
+[resource]
+resource_name = "N00_000_00_FaceBrow_00_FACE (Instance)"
+transparency = 4
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_2dbuw")

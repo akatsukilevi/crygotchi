@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://by4jled5bjgj4"]
+
+[ext_resource type="Texture2D" uid="uid://cf3fkak3hms0j" path="res://assets/characters/pcs/hikari/textures/_01.png" id="1_w73nm"]
+
+[resource]
+resource_name = "N00_000_00_FaceMouth_00_FACE (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_w73nm")
