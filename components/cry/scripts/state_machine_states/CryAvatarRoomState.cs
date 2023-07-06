@@ -1,22 +1,29 @@
 ﻿namespace Crygotchi.CryRoomStates;
-internal class CryAvatarRoomState : IState
+public class CryAvatarRoomState : IState
 {
-    public void Enter()
+    protected CryAvatarRoomStateMachine stateMachine;
+
+    public CryAvatarRoomState(CryAvatarRoomStateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+
+    public virtual void Enter()
     {
 
     }
 
-    public void Exit()
+    public virtual void Exit()
     {
 
     }
 
-    public void HandleInput()
+    public virtual void PhysicsProcess(double delta)
     {
 
     }
 
-    public void Process()
+    public virtual void Process(double delta)
     {
 
     }

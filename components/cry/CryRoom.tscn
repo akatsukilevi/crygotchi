@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dljfb6wb5ow8c"]
+
+[ext_resource type="PackedScene" uid="uid://clqaolqygps5m" path="res://components/avatar/hikari/HikariAvatar.tscn" id="1_ahhwx"]
+[ext_resource type="Script" path="res://components/cry/scripts/CryRoomController.cs" id="1_ybr6y"]
+[ext_resource type="PackedScene" uid="uid://bffsscaicoxhf" path="res://components/avatar/cry/CryAvatar.tscn" id="2_3wdls"]
+
+[node name="CryRoom" type="CharacterBody3D" node_paths=PackedStringArray("AAHelper")]
+script = ExtResource("1_ybr6y")
+AAHelper = NodePath("Cry")
+
+[node name="Hikari" parent="." instance=ExtResource("1_ahhwx")]
+visible = false
+
+[node name="Cry" parent="." instance=ExtResource("2_3wdls")]

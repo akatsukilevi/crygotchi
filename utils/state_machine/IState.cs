@@ -4,6 +4,6 @@ public interface IState
 {
     public void Enter();
     public void Exit();
-    public void Process();
-    public void HandleInput();
+    public void Process(double delta);
+    public void PhysicsProcess(double delta);
 }
