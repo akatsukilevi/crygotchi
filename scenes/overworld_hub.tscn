@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dj0n1wfnntcgq"]
+[gd_scene load_steps=10 format=3 uid="uid://dj0n1wfnntcgq"]
 
 [ext_resource type="PackedScene" uid="uid://bpfxnttam50q1" path="res://components/hub/mesh/HubMesh.tscn" id="1_cjump"]
 [ext_resource type="Script" path="res://components/hub/scripts/cry/CryCamera.cs" id="2_nc5h4"]
-[ext_resource type="PackedScene" uid="uid://cku3kwh7mgtay" path="res://assets/cry/CryCharacter.tscn" id="3_5u1if"]
-[ext_resource type="Script" path="res://components/hub/scripts/cry/CryController.cs" id="4_esp3h"]
+[ext_resource type="PackedScene" uid="uid://b1kisxkvqcn2i" path="res://components/cry/CryHub.tscn" id="3_r24gs"]
 [ext_resource type="PackedScene" uid="uid://c6hsfusp2nx6a" path="res://components/hub/npcs/bob_npc.tscn" id="5_1t2s3"]
 [ext_resource type="PackedScene" uid="uid://fixmahy767ad" path="res://components/hub/npcs/alice_npc.tscn" id="5_q6qio"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a3lci"]
+sky_top_color = Color(0.398306, 0.468266, 0.565609, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
@@ -38,6 +38,7 @@ environment = SubResource("Environment_5lval")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
 light_color = Color(0.815686, 0.768627, 0.921569, 1)
+shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="Hub Mesh" parent="World" instance=ExtResource("1_cjump")]
@@ -52,7 +53,7 @@ size = 20.0
 near = 0.01
 script = ExtResource("2_nc5h4")
 CullingArea = NodePath("Area3D")
-Target = NodePath("../Cry")
+Target = NodePath("../CryHub")
 Offset = Vector3(90, 75, 90)
 CullIgnoreGroups = PackedStringArray("Hub_Player", "Hub_NoCulling", "Hub_NPC")
 
@@ -64,10 +65,8 @@ priority = 1.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character/Camera3D/Area3D" groups=["Hub_Player"]]
 shape = SubResource("BoxShape3D_cbtvu")
 
-[node name="Cry" parent="Character" node_paths=PackedStringArray("Camera") instance=ExtResource("3_5u1if")]
-transform = Transform3D(-0.744312, 0, -0.667832, 0, 1, 0, 0.667832, 0, -0.744312, 0, 1.75, -23)
-collision_layer = 2
-script = ExtResource("4_esp3h")
+[node name="CryHub" parent="Character" node_paths=PackedStringArray("Camera") groups=["Hub_Player"] instance=ExtResource("3_r24gs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3, 0)
 Camera = NodePath("../Camera3D")
 
 [node name="NPCs" type="Node3D" parent="."]

@@ -8,59 +8,56 @@ public partial class CryController : CharacterBody3D
     [ExportCategory("Character Controller")]
     [ExportGroup("References")]
     [Export] public Node3D Camera;
+    [Export] public AvatarAnimationHelper AAHelper;
 
     [ExportGroup("Settings")]
-    [Export] public float MoveSpeed = 100.0f;
-    [Export] public float MaxSpeed = 50.0f;
-    [Export] public float Gravity = -80.0f;
 
-    private AnimationPlayer _animator;
-    private CryState _state;
+    //private AnimationTree _animator;
 
     private Vector3 _inputDirection = Vector3.Zero;
     private Vector3 _moveDirection = Vector3.Zero;
     private bool _isRunning = false;
 
+    private float _smoothAngle;
+
+    private Vector3 _gravity;
+    private Vector3 animatorVelocity;
+
     public override void _Ready()
     {
-        this._animator = this.GetNode<AnimationPlayer>("./AnimationPlayer");
-        this._state = this.GetNode<CryState>("/root/CryState");
-
-        this._animator.Play("Idle");
+        //this._state = this.GetNode<CryState>("/root/CryState");
+        AAHelper.Animator.Active = true;
+        _gravity = ((float)ProjectSettings.GetSetting("physics/3d/default_gravity")) * ((Vector3)ProjectSettings.GetSetting("physics/3d/default_gravity_vector"));
     }
 
     public override void _Process(double delta)
     {
-        if (this._state.IsBusy()) return;
+        _inputDirection = GetInputDirection();
+        _isRunning = Input.IsKeyPressed(Key.Shift);
 
-        this._inputDirection = GetInputDirection();
-        this._isRunning = Input.IsKeyPressed(Key.Shift);
+        if (_inputDirection.Normalized().Length() > 0.01f)
+        {
+            float targetAngle = Mathf.Atan2(_inputDirection.X, _inputDirection.Z) * MathUtils.Rad2Deg + Camera.GlobalRotation.Y * MathUtils.Rad2Deg;
+            float smoothTarget = MathUtils.SmoothDampAngle(GlobalRotation.Y * MathUtils.Rad2Deg, targetAngle, ref _smoothAngle, 0.1f, Mathf.Inf, delta);
+            GlobalRotation = new Vector3(0.0f, smoothTarget * MathUtils.Deg2Rad, 0.0f);
+
+            //Set proper flag
+            AAHelper.AnimParams["Walking"] = true;
+        }
+        else
+        {
+            AAHelper.AnimParams["Walking"] = false;
+        }
+        AAHelper.AnimParams["Sprinting"] = _isRunning;
+        animatorVelocity = (Transform.Basis.GetRotationQuaternion().Normalized() * AAHelper.Animator.GetRootMotionPosition()) / (float)delta;
     }
+
     public override void _PhysicsProcess(double delta)
     {
-        // only forward direction if player trying to move forward or right
-        Vector3 forwards = this.Camera.GlobalTransform.Basis.Z * this._inputDirection.Z;
-        Vector3 right = this.Camera.GlobalTransform.Basis.X * this._inputDirection.X;
 
-        // Get Move Direction relative to the camera
-        this._moveDirection = forwards + right;
-        if (this._moveDirection.Length() > 1.0f) this._moveDirection = this._moveDirection.Normalized();
-        this._moveDirection.Y = 0.0f;
-
-        //* Move character
-        this.Velocity = GetVelocity(this._moveDirection, (float)delta);
-        this.MoveAndSlide();
-
-        if (this._moveDirection.Length() > 0.001)
-        {
-            //* If moving, look towards it
-            this.LookAt(this.GlobalTransform.Origin + (-this._moveDirection), Vector3.Up);
-            this._animator.Play(this._isRunning ? "Running" : "Walking");
-            return;
-        }
-
-        //* Not moving, just stop and go idle
-        this._animator.Play("Idle");
+        animatorVelocity += _gravity * (float)delta + new Vector3(0.0f, Velocity.Y, 0.0f);
+        Velocity = animatorVelocity;
+        MoveAndSlide();
     }
 
     private Vector3 GetInputDirection()
@@ -72,17 +69,17 @@ public partial class CryController : CharacterBody3D
         );
     }
 
-    private Vector3 GetVelocity(Vector3 direction, float delta)
-    {
-        Vector3 velocity = direction * delta * this.MoveSpeed;
+    //private Vector3 GetVelocity(Vector3 direction, float delta)
+    //{
+    //    Vector3 velocity = direction * delta * this.MoveSpeed;
 
-        //* Clamp the velocity down
-        if (velocity.Length() > this.MaxSpeed) velocity = velocity.Normalized() * this.MaxSpeed;
+    //    //* Clamp the velocity down
+    //    if (velocity.Length() > this.MaxSpeed) velocity = velocity.Normalized() * this.MaxSpeed;
 
-        if (this._isRunning) velocity *= 5f;
+    //    if (this._isRunning) velocity *= 5f;
 
-        //* Add gravity force and return it
-        velocity.Y = velocity.Y + this.Gravity * delta;
-        return velocity;
-    }
+    //    //* Add gravity force and return it
+    //    velocity.Y = velocity.Y + this.Gravity * delta;
+    //    return velocity;
+    //}
 }

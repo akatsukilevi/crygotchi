@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://drj481xjmj7tn"]
+
+[ext_resource type="Texture2D" uid="uid://dtptlb0rj4uvt" path="res://assets/characters/pcs/hikari/textures/_10.png" id="1_neqjc"]
+[ext_resource type="Texture2D" uid="uid://bbub862opwlig" path="res://assets/characters/pcs/hikari/textures/_11.png" id="2_c13w1"]
+
+[resource]
+resource_name = "N00_000_00_Body_00_SKIN (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_neqjc")
+normal_enabled = true
+normal_texture = ExtResource("2_c13w1")

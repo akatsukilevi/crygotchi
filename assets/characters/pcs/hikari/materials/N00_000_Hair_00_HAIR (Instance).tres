@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://d1bw6kb3ryq14"]
+
+[ext_resource type="Texture2D" uid="uid://c4oihaliae3hq" path="res://assets/characters/pcs/hikari/textures/_22.png" id="1_nc518"]
+[ext_resource type="Texture2D" uid="uid://c53nmho2wufmm" path="res://assets/characters/pcs/hikari/textures/N00_000_Hair_00_nml.png" id="2_4vblh"]
+
+[resource]
+resource_name = "N00_000_Hair_00_HAIR (Instance)"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_nc518")
+normal_enabled = true
+normal_texture = ExtResource("2_4vblh")
