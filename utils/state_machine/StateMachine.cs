@@ -3,6 +3,7 @@
 public abstract class StateMachine
 {
     protected IState _currentState;
+
     public void ChangeState(IState NextState)
     {
         _currentState?.Exit();
