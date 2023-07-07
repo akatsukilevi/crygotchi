@@ -25,13 +25,14 @@ public partial class CryRoomController : CharacterBody3D
     {
         base._Ready();
 
-        _controllerStateMachine = new CryAvatarRoomStateMachine(this);
-        _controllerStateMachine.ChangeState(_controllerStateMachine.IdleState);
-
         this._room = this.GetNode<RoomState>("/root/RoomState");
         this._room.OnStateChange += this.OnRoomUpdate;
+
+        this._controllerStateMachine = new CryAvatarRoomStateMachine(this, this._room);
+        this._controllerStateMachine.ChangeState(_controllerStateMachine.IdleState);
+
         this.GetNextTargetTilePosition();
-        GlobalPosition += Vector3.Up;
+        this.GlobalPosition += Vector3.Up;
     }
 
     public override void _Process(double delta)
@@ -44,6 +45,7 @@ public partial class CryRoomController : CharacterBody3D
             AAHelper.Animator.Active = false;
             return;
         }
+
         Visible = true;
         AAHelper.Animator.Active = true;
         _controllerStateMachine.Process(delta);
@@ -57,12 +59,31 @@ public partial class CryRoomController : CharacterBody3D
 
     private void OnRoomUpdate(bool _)
     {
+        //* Change the current state to the room change state
+        this._controllerStateMachine.ChangeState(this._controllerStateMachine.RoomChangedPanicState);
+
         //* Check if it is in exporing mode
         this._isExploringMode = this._room.GetMode() == RoomMode.Exploring;
 
         this.GetNextTargetTilePosition();
     }
 
+    public Vector2 GetCurrentPosition()
+    {
+        return this._currentTile;
+    }
+
+    public Vector3 TeleportToRandomTile()
+    {
+        var target = this._room.GetRandomTile();
+
+        //* Has valid position here, set as current and previous, and just continue
+        this._previousTile = target?.Key ?? this._previousTile;
+        this._currentTile = target?.Key ?? this._currentTile;
+        this._isCryVisible = target != null;
+
+        return new Vector3(this._currentTile.X * 2, 1f, this._currentTile.Y * 2);
+    }
 
     //TODO: Add GetNextTilePosition method that will be used by state machine.
     //TODO: Parametrize times between states
@@ -85,19 +106,15 @@ public partial class CryRoomController : CharacterBody3D
         };
         //* Ignore all tiles that are not valid
         tiles.RemoveAll(x => x == null);
-        //* Ignore the previous tile
+
+        //* Ignore the previous and current tile
         tiles.RemoveAll(x => x.Position == this._previousTile);
+        tiles.RemoveAll(x => x.Position == this._currentTile);
 
         //* If no tiles left, means we're stuck, teleport somewhere that is not stuck, go there
         if (tiles.Count == 0)
         {
-            var target = this._room.GetRandomTile();
-
-            //* Has valid position here, set as current and previous, and just continue
-            this._previousTile = target?.Key ?? this._previousTile;
-            this._currentTile = target?.Key ?? this._currentTile;
-            this._isCryVisible = target != null;
-            GlobalPosition = new Vector3(this._currentTile.X * 2, 1f, this._currentTile.Y * 2);
+            this.GlobalPosition = this.TeleportToRandomTile();
 
             if (this._isCryVisible) GD.Print($"[ CRY ] Teleporting to [{this._currentTile.X}, {this._currentTile.Y}]");
             return GlobalPosition;
@@ -107,6 +124,7 @@ public partial class CryRoomController : CharacterBody3D
         this._previousTile = this._currentTile;
         this._currentTile = tiles.ElementAt(Random.Shared.Next(0, tiles.Count - 1)).Position;
         this._isCryVisible = true;
+
         GD.Print($"[ CRY ] Moving to [{this._currentTile.X}, {this._currentTile.Y}] from [{this._previousTile.X}, {this._previousTile.Y}]");
         return new Vector3(this._currentTile.X * 2, 1f, this._currentTile.Y * 2);
     }

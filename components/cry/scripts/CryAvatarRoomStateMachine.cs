@@ -1,22 +1,20 @@
 ﻿namespace Crygotchi;
+
 public class CryAvatarRoomStateMachine : StateMachine
 {
-    //public RoomState _roomState;
     public CryRoomController Avatar;
 
     public CryRoomStates.CryIdleState IdleState { get; }
     public CryRoomStates.CryWalkingState WalkingState { get; }
-    //public PlayerJogState JogState { get; }
-    //public PlayerSprintState SprintState { get; }
+    public CryRoomStates.CryRoomChangedPanicState RoomChangedPanicState { get; }
 
-    public CryAvatarRoomStateMachine(CryRoomController avatarController)
+    public CryAvatarRoomStateMachine(CryRoomController avatarController, RoomState roomState)
     {
-        Avatar = avatarController;
+        this.Avatar = avatarController;
 
-        IdleState = new CryRoomStates.CryIdleState(this);
-        WalkingState = new CryRoomStates.CryWalkingState(this);
-        //JogState = new PlayerJogState(this);
-        //SprintState = new PlayerSprintState(this);
+        this.IdleState = new(this);
+        this.WalkingState = new(this);
+        this.RoomChangedPanicState = new(this, roomState);
     }
 
 }
