@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwpepdhcssptr"]
+[gd_scene load_steps=8 format=3 uid="uid://cwpepdhcssptr"]
 
 [ext_resource type="PackedScene" uid="uid://jevpdgxbemyj" path="res://components/cursor/cursor.tscn" id="1_wbiw1"]
 [ext_resource type="PackedScene" uid="uid://kywqnwtrcbla" path="res://components/room/room.tscn" id="2_4hjd7"]
 [ext_resource type="PackedScene" uid="uid://dljfb6wb5ow8c" path="res://components/cry/CryRoom.tscn" id="3_xut8b"]
+[ext_resource type="PackedScene" uid="uid://ddd4gorrs4lj3" path="res://scenes/main_menu.tscn" id="4_71hhj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2boy"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,6 +33,7 @@ directional_shadow_mode = 1
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 30, -30)
+cull_mask = 524287
 projection = 1
 current = true
 size = 40.0
@@ -43,3 +45,5 @@ Cursor = NodePath("../Cursor")
 
 [node name="CryRoom" parent="." instance=ExtResource("3_xut8b")]
 visible = false
+
+[node name="main_menu" parent="." instance=ExtResource("4_71hhj")]

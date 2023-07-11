@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://jevpdgxbemyj"]
+[gd_scene load_steps=9 format=3 uid="uid://jevpdgxbemyj"]
 
 [ext_resource type="Script" path="res://components/cursor/scripts/CursorManager.cs" id="1_q0eie"]
 [ext_resource type="Script" path="res://components/cursor/scripts/CursorInput.cs" id="3_jlrq8"]
@@ -6,12 +6,55 @@
 [ext_resource type="PackedScene" uid="uid://cnyv4f1mde1iy" path="res://components/room/room_tile.tscn" id="5_c64e5"]
 [ext_resource type="PackedScene" uid="uid://driwyv83grbeg" path="res://components/cursor/models/Icon_Remove.glb" id="5_roosv"]
 
+[sub_resource type="Animation" id="Animation_21rkh"]
+resource_name = "pop_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(2, 0.5, 2),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(1.1, 1.1, 1.1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mvt2g"]
+resource_name = "startup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jissk"]
+_data = {
+"pop_in": SubResource("Animation_21rkh"),
+"startup": SubResource("Animation_mvt2g")
+}
+
 [node name="Cursor" type="Node3D"]
 
-[node name="Manager" type="Node" parent="." node_paths=PackedStringArray("IconBase", "CursorBase", "IconRemove", "IconTile", "IconItem")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "startup"
+libraries = {
+"": SubResource("AnimationLibrary_jissk")
+}
+
+[node name="Manager" type="Node" parent="." node_paths=PackedStringArray("IconBase", "CursorBase", "CursorAnimator", "IconRemove", "IconTile", "IconItem")]
 script = ExtResource("1_q0eie")
 IconBase = NodePath("../Mesh/Icons")
 CursorBase = NodePath("../Mesh")
+CursorAnimator = NodePath("../AnimationPlayer")
 IconRemove = NodePath("../Mesh/Icons/Icon_Remove")
 IconTile = NodePath("../Mesh/Icons/Icon_Tile")
 IconItem = NodePath("../Mesh/Icons/Icon_Item")
@@ -24,6 +67,7 @@ NegativeColor = Color(1, 0.52549, 0.588235, 1)
 script = ExtResource("3_jlrq8")
 
 [node name="Mesh" parent="." instance=ExtResource("3_onvfj")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="Icons" type="Node3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)

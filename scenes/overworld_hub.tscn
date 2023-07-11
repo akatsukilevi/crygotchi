@@ -60,7 +60,7 @@ CullIgnoreGroups = PackedStringArray("Hub_Player", "Hub_NoCulling", "Hub_NPC")
 [node name="Area3D" type="Area3D" parent="Character/Camera3D" groups=["Hub_Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -5.96046e-08, 1, 0, 0, -100)
 input_ray_pickable = false
-priority = 1.0
+priority = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character/Camera3D/Area3D" groups=["Hub_Player"]]
 shape = SubResource("BoxShape3D_cbtvu")

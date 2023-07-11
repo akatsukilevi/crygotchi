@@ -13,7 +13,7 @@ config_version=5
 config/name="Crygotchi"
 config/description=" A casual room building, decoration and virtual pet game"
 run/main_scene="res://scenes/intro.tscn"
-config/features=PackedStringArray("4.0", "C#", "Forward Plus")
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+AppState="*res://core/AppState.cs"
 TilesDatabase="*res://core/databases/TilesDatabase.cs"
 ItemsDatabase="*res://core/databases/ItemsDatabase.cs"
 SaveManager="*res://core/save/SaveManager.cs"
@@ -50,7 +50,7 @@ project/assembly_name="Crygotchi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/panku_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/panku_console/plugin.cfg")
 
 [filesystem]
 

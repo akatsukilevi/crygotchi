@@ -1,7 +1,89 @@
-[gd_scene load_steps=14 format=3 uid="uid://ddd4gorrs4lj3"]
+[gd_scene load_steps=18 format=3 uid="uid://ddd4gorrs4lj3"]
 
-[ext_resource type="Texture2D" uid="uid://dkff42q21j1w2" path="res://assets/Logo.png" id="1_5ijmf"]
+[ext_resource type="PackedScene" uid="uid://ivk48si3lk5i" path="res://assets/logo/logo_animated.tscn" id="1_sg1h4"]
+[ext_resource type="Script" path="res://components/intro/MenuController.cs" id="1_t762y"]
 [ext_resource type="FontFile" uid="uid://b8kvh0dsg4gih" path="res://assets/fonts/Candara.ttf" id="2_x6vu0"]
+
+[sub_resource type="Animation" id="Animation_vlqy3"]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("top_content:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bottom_content:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("top_bar:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bottom_bar_anchor:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("screen_fade:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"OnMenuFadedOut"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_hefwb"]
 resource_name = "show_in"
@@ -21,11 +103,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("top_content/TextureRect:modulate")
+tracks/1/path = NodePath("bottom_content/Key_Panel/Label:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(3, 4),
+"times": PackedFloat32Array(4.5, 5.5),
 "transitions": PackedFloat32Array(1.5, 1.5),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -33,19 +115,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bottom_content/Key_Panel/Label:modulate")
+tracks/2/path = NodePath("top_bar:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4.5, 5.5),
-"transitions": PackedFloat32Array(1.5, 1.5),
+"times": PackedFloat32Array(2.1, 2.9),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("top_bar:modulate")
+tracks/3/path = NodePath("bottom_bar_anchor/bottom_bar:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -57,60 +139,68 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("bottom_bar_anchor/bottom_bar:modulate")
+tracks/4/path = NodePath("top_bar:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(2.1, 2.9),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(64, -256), Vector2(64, -64)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("top_bar:position")
+tracks/5/path = NodePath("bottom_bar_anchor/bottom_bar:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(2.1, 2.9),
 "transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
-"values": [Vector2(64, -256), Vector2(64, -64)]
+"values": [Vector2(-64, 0), Vector2(-64, -128)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("bottom_bar_anchor/bottom_bar:position")
+tracks/6/path = NodePath("bottom_content/Key_Panel:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(2.1, 2.9),
-"transitions": PackedFloat32Array(0.5, 0.5),
-"update": 0,
-"values": [Vector2(-64, 0), Vector2(-64, -128)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("bottom_content/Key_Panel:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(4.1, 5),
 "transitions": PackedFloat32Array(1.5, 1.5),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EnableInputWait"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u2xer"]
 _data = {
+"fade_out": SubResource("Animation_vlqy3"),
 "show_in": SubResource("Animation_hefwb")
 }
 
+[sub_resource type="Environment" id="Environment_bfck8"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uyl2g"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="Gradient" id="Gradient_mv22q"]
 offsets = PackedFloat32Array(0.1, 0.25, 0.35, 0.75, 0.85, 0.95)
-colors = PackedColorArray(0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0.392157, 0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0, 0.490196, 0.47451, 0.756863, 0.392157, 0.490196, 0.47451, 0.756863, 0)
+colors = PackedColorArray(0.560784, 0.654902, 0.278431, 0, 0.560784, 0.654902, 0.278431, 0.392157, 0.560784, 0.654902, 0.278431, 0, 0.560784, 0.654902, 0.278431, 0, 0.560784, 0.654902, 0.278431, 0.392157, 0.560784, 0.654902, 0.278431, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ebq4a"]
 gradient = SubResource("Gradient_mv22q")
@@ -122,7 +212,7 @@ texture = SubResource("GradientTexture2D_ebq4a")
 
 [sub_resource type="Gradient" id="Gradient_8inko"]
 offsets = PackedFloat32Array(0, 0.4)
-colors = PackedColorArray(0.215686, 0.192157, 0.466667, 1, 0.215686, 0.192157, 0.466667, 0)
+colors = PackedColorArray(0.560784, 0.654902, 0.278431, 1, 0.560784, 0.654902, 0.278431, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7sbd7"]
 gradient = SubResource("Gradient_8inko")
@@ -136,7 +226,7 @@ texture = SubResource("GradientTexture2D_7sbd7")
 
 [sub_resource type="Gradient" id="Gradient_jnmhr"]
 offsets = PackedFloat32Array(0, 0.5)
-colors = PackedColorArray(0.215686, 0.192157, 0.466667, 1, 0.215686, 0.192157, 0.466667, 0)
+colors = PackedColorArray(0.560784, 0.654902, 0.278431, 1, 0.560784, 0.654902, 0.278431, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_b2nhx"]
 gradient = SubResource("Gradient_jnmhr")
@@ -147,13 +237,15 @@ fill_from = Vector2(0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0j50"]
 texture = SubResource("GradientTexture2D_b2nhx")
 
-[node name="main_menu" type="Control"]
+[node name="main_menu" type="Control" node_paths=PackedStringArray("Animator")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t762y")
+Animator = NodePath("Animator")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 autoplay = "show_in"
@@ -161,7 +253,22 @@ libraries = {
 "": SubResource("AnimationLibrary_u2xer")
 }
 
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(900, 800)
+render_target_clear_mode = 2
+
+[node name="Logo" parent="SubViewport" instance=ExtResource("1_sg1h4")]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, 5)
+cull_mask = 524288
+environment = SubResource("Environment_bfck8")
+projection = 1
+size = 10.0
+
 [node name="top_content" type="CenterContainer" parent="."]
+modulate = Color(1, 1, 1, 0.75)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,14 +277,13 @@ offset_bottom = -405.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="top_content"]
+[node name="logo" type="TextureRect" parent="top_content"]
 custom_minimum_size = Vector2(512, 256)
 layout_mode = 2
-texture = ExtResource("1_5ijmf")
-expand_mode = 2
-stretch_mode = 5
+texture = SubResource("ViewportTexture_uyl2g")
 
 [node name="bottom_content" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.75)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -198,6 +304,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_43ebr")
 
 [node name="Label" type="Label" parent="bottom_content/Key_Panel"]
+modulate = Color(1, 1, 1, 0.353553)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -232,6 +339,7 @@ rotation = 0.0436332
 theme_override_styles/panel = SubResource("StyleBoxTexture_o2drk")
 
 [node name="bottom_bar_anchor" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.75)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -256,6 +364,7 @@ rotation = 0.00872665
 theme_override_styles/panel = SubResource("StyleBoxTexture_x0j50")
 
 [node name="screen_fade" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.75)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

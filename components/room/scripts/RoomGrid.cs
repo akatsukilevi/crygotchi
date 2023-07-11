@@ -13,6 +13,7 @@ public partial class RoomGrid : Node
     [Export] private TextureRect MainIndicator;
     [Export] private TextureRect SubIndicator;
     [Export] private Label TileIndicator;
+    [Export] private AnimationPlayer Animator;
     [ExportGroup("Templates")]
     [Export] private PackedScene TileTemplate;
     [ExportGroup("Assets")]
@@ -23,6 +24,7 @@ public partial class RoomGrid : Node
     private Dictionary<string, RoomTileObject> _instances = new();
     private CursorState _cursorState;
     private RoomState _roomState;
+    private AppState _appState;
 
     public override void _Ready()
     {
@@ -30,14 +32,21 @@ public partial class RoomGrid : Node
 
         this._cursorState = this.GetNode<CursorState>("/root/CursorState");
         this._roomState = this.GetNode<RoomState>("/root/RoomState");
+        this._appState = this.GetNode<AppState>("/root/AppState");
 
         this._roomState.OnStateChange += this.OnStateChange;
         this._roomState.OnInteract += this.OnCursorAction;
+        this._appState.OnMainMenuClose += this.OnMenuClose;
 
         this.OnStateChange(false);
     }
 
     #region "General"
+    public void OnMenuClose()
+    {
+        this.Animator.Play("fade_in");
+    }
+
     public void SwitchMode()
     {
         switch (this._roomState.GetMode())

@@ -8,6 +8,7 @@ public partial class CursorManager : Node
     [ExportGroup("References")]
     [Export] private Node3D IconBase;
     [Export] private Node3D CursorBase;
+    [Export] private AnimationPlayer CursorAnimator;
 
     [ExportCategory("Apppearance")]
     [ExportGroup("Icons")]
@@ -23,6 +24,7 @@ public partial class CursorManager : Node
 
     private CursorState _cursorState;
     private RoomState _roomState;
+    private AppState _appState;
 
     private MeshInstance3D _cursorIndicator;
     private MeshInstance3D _cursorBorder;
@@ -39,6 +41,7 @@ public partial class CursorManager : Node
 
         this._cursorState = GetNode<CursorState>("/root/CursorState");
         this._roomState = GetNode<RoomState>("/root/RoomState");
+        this._appState = GetNode<AppState>("/root/AppState");
 
         this._animator = GetNode<AnimationPlayer>("../Mesh/AnimationPlayer");
         this._parent = GetNode<Node3D>("..");
@@ -55,8 +58,14 @@ public partial class CursorManager : Node
         this._cursorState.OnStateChange += OnStateUpdate;
         this._cursorState.OnItemChange += OnItemUpdate;
         this._roomState.OnStateChange += (bool _) => OnStateUpdate();
+        this._appState.OnMainMenuClose += OnMenuClose;
 
         this.OnStateUpdate();
+    }
+
+    private void OnMenuClose()
+    {
+        this.CursorAnimator.Play("pop_in");
     }
 
     private void OnStateUpdate()
