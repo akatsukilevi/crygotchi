@@ -1,4 +1,5 @@
-﻿namespace Crygotchi.CryRoomStates;
+﻿namespace AfterlifeAdventures.CryRoomStates;
+
 public class CryAvatarRoomState : IState
 {
     protected CryAvatarRoomStateMachine stateMachine;

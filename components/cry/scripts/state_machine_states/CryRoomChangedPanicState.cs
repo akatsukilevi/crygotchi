@@ -1,4 +1,4 @@
-namespace Crygotchi.CryRoomStates;
+namespace AfterlifeAdventures.CryRoomStates;
 
 public class CryRoomChangedPanicState : CryOnGroundState
 {

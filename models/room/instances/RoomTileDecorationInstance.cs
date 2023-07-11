@@ -1,6 +1,6 @@
 using Godot.Collections;
 
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 public abstract partial class RoomTileDecorationInstance : Resource
 {

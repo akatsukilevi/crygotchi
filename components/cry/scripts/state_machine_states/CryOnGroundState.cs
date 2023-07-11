@@ -1,4 +1,5 @@
-﻿namespace Crygotchi.CryRoomStates;
+﻿namespace AfterlifeAdventures.CryRoomStates;
+
 public class CryOnGroundState : CryAvatarRoomState
 {
     protected static Vector3 animatorVelocity;
@@ -12,7 +13,7 @@ public class CryOnGroundState : CryAvatarRoomState
 
     public override void Process(double delta)
     {
-        if(stateMachine.Avatar.Position.DistanceTo(targetPosition) > 0.1f)
+        if (stateMachine.Avatar.Position.DistanceTo(targetPosition) > 0.1f)
         {
             float targetAngle = Transform3D.Identity.LookingAt((stateMachine.Avatar.Position - targetPosition).Normalized(), Vector3.Up).Basis.GetEuler().Y * MathUtils.Rad2Deg;
             float smoothTarget = MathUtils.SmoothDampAngle(stateMachine.Avatar.GlobalRotation.Y * MathUtils.Rad2Deg, targetAngle, ref smoothAngle, 0.1f, Mathf.Inf, delta);

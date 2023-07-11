@@ -1,4 +1,4 @@
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 public partial class FarmingCamera : Camera3D
 {

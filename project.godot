@@ -10,15 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Crygotchi"
-config/description=" A casual room building, decoration and virtual pet game"
+config/name="Life & Death: Afterlife Adventures"
+config/description="When born beyond the mortal realm, the afterlife becomes quite the adventure to unfold"
 run/main_scene="res://scenes/intro.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -46,7 +46,7 @@ window/vsync/vsync_mode=0
 
 [dotnet]
 
-project/assembly_name="Crygotchi"
+project/assembly_name="AfterlifeAdventures"
 
 [editor_plugins]
 

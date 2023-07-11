@@ -1,4 +1,4 @@
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 using System.Collections.Generic;
 using System.IO;

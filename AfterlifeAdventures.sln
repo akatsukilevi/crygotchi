@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crygotchi", "Crygotchi.csproj", "{760E4FC0-E211-4530-84C9-D4B1B62C4B44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfterlifeAdventures", "AfterlifeAdventures.csproj", "{760E4FC0-E211-4530-84C9-D4B1B62C4B44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
-﻿namespace Crygotchi.CryRoomStates;
+﻿namespace AfterlifeAdventures.CryRoomStates;
+
 public class CryIdleState : CryOnGroundState
 {
     private double _timer = 0.0f;

@@ -1,10 +1,10 @@
 using Godot.Collections;
 
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 public partial class SaveManager : Node
 {
-    private static string SavePath = "user://crygotchi_save.tres";
+    private static string SavePath = "user://ld_save.tres";
 
     private SaveGame _save = new SaveGame();
 

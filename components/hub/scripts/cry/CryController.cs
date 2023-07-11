@@ -1,4 +1,4 @@
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 // TODO: Better Cry Input handling
 //! Cry controls shouldn't be hardcoded like it is now

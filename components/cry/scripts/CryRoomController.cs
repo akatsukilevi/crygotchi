@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 public partial class CryRoomController : CharacterBody3D
 {

@@ -2,9 +2,9 @@
 global using System;
 global using System.Linq;
 
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
-public class Crygotchi
+public class AfterlifeAdventures
 {
 
 }

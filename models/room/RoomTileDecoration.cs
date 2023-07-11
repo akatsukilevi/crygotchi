@@ -1,4 +1,4 @@
-namespace Crygotchi;
+namespace AfterlifeAdventures;
 
 public abstract partial class RoomTileDecoration : Resource, IDatabaseItem
 {

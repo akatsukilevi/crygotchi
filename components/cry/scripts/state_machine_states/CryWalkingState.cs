@@ -1,4 +1,5 @@
-﻿namespace Crygotchi.CryRoomStates;
+﻿namespace AfterlifeAdventures.CryRoomStates;
+
 public class CryWalkingState : CryOnGroundState
 {
     public CryWalkingState(CryAvatarRoomStateMachine stateMachine) : base(stateMachine)
@@ -17,7 +18,7 @@ public class CryWalkingState : CryOnGroundState
         base.Process(delta);
 
         //Time to switch back to idle
-        if(stateMachine.Avatar.Position.DistanceTo(targetPosition) < 0.1f)
+        if (stateMachine.Avatar.Position.DistanceTo(targetPosition) < 0.1f)
         {
             //snap to position
             stateMachine.Avatar.GlobalPosition = targetPosition;
